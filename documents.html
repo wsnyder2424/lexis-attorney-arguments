@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documents | Kathleen Finnerty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: #f0f0f0;
+      color: #434345;
+      font-size: 14px;
+    }
+
+    /* ── Top Navigation (identical to index.html) ────────────────── */
+    .top-nav {
+      display: flex;
+      align-items: stretch;
+      height: 58px;
+      background: #373739;
+      width: 100%;
+      min-width: 900px;
+    }
+    .nav-grid {
+      width: 40px;
+      min-width: 40px;
+      background: #373739;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .nav-logo {
+      width: 156px;
+      min-width: 156px;
+      background: #434345;
+      display: flex;
+      align-items: center;
+      padding-left: 15px;
+    }
+    .nav-logo span { color: #fff; font-size: 14px; font-weight: 700; letter-spacing: 0.3px; }
+    .nav-browse {
+      width: 155px;
+      min-width: 155px;
+      background: #373739;
+      border-left: 1px solid #525253;
+      border-right: 1px solid #525253;
+      display: flex;
+      align-items: center;
+      padding-left: 14px;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .nav-browse span { color: #fff; font-size: 14px; }
+    .nav-search {
+      flex: 1;
+      background: #373739;
+      display: flex;
+      align-items: center;
+      padding: 9px 16px;
+    }
+    .search-bar {
+      display: flex;
+      align-items: stretch;
+      height: 40px;
+      background: #fff;
+      border-radius: 2px;
+      width: 100%;
+      max-width: 758px;
+      overflow: hidden;
+    }
+    .search-dropdown {
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      color: #434345;
+      font-size: 14px;
+      white-space: nowrap;
+      border-right: 1px solid #D0D0D0;
+      gap: 5px;
+      cursor: pointer;
+      background: #fff;
+      flex-shrink: 0;
+    }
+    .search-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      color: #434345;
+      font-family: 'Lato', sans-serif;
+      font-size: 14px;
+      padding: 0 12px;
+    }
+    .search-btn {
+      width: 44px;
+      background: #D52B1E;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .nav-right { display: flex; align-items: stretch; margin-left: auto; }
+    .nav-right-item {
+      display: flex;
+      align-items: center;
+      padding: 0 18px;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      border-left: 1px solid #525253;
+      white-space: nowrap;
+    }
+    .nav-right-item:hover { background: #434345; }
+
+    /* ── Page wrapper ────────────────────────────────────────────── */
+    .page-content { background: #fff; width: 100%; }
+
+    /* ── Breadcrumb ──────────────────────────────────────────────── */
+    .breadcrumb {
+      padding: 14px 0 0 40px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+    .breadcrumb a { color: #1248A0; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb-current { color: #434345; }
+
+    /* ── Profile header ──────────────────────────────────────────── */
+    .profile-header {
+      padding: 20px 40px 20px 40px;
+      display: flex;
+      align-items: center;
+      gap: 41px;
+    }
+    .profile-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #c8c8c8;
+    }
+    .profile-info h1 { font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+    .profile-info p { font-size: 12px; color: #606060; }
+
+    /* ── Tab bar ─────────────────────────────────────────────────── */
+    .tab-bar {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      border-bottom: 1px solid #E0E0E0;
+      padding-left: 40px;
+    }
+    .tab-bar-left { display: flex; }
+    .tab {
+      padding: 8px 0 10px;
+      margin-right: 28px;
+      font-size: 14px;
+      color: #606060;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      white-space: nowrap;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .tab.active { color: #D52B1E; border-bottom-color: #D52B1E; font-weight: 700; }
+    .tab:hover:not(.active) { color: #434345; }
+    .tab-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 20px 10px;
+      color: #606060;
+    }
+    .tab-icon { cursor: pointer; color: #606060; }
+    .tab-icon:hover { color: #1248A0; }
+
+    /* ── Main layout ─────────────────────────────────────────────── */
+    html, body { height: 100%; }
+    .page-content { min-height: calc(100vh - 58px); display: flex; flex-direction: column; }
+    .main-layout { display: flex; padding: 20px 0 0 40px; flex: 1; }
+
+    /* ── Left sidebar (shared) ───────────────────────────────────── */
+    .sidebar { width: 258px; min-width: 258px; margin-right: 0; flex-shrink: 0; }
+    .sidebar-search { position: relative; margin-bottom: 16px; }
+    .sidebar-search input {
+      width: 100%;
+      padding: 8px 36px 8px 10px;
+      border: 1px solid #D0D0D0;
+      border-radius: 3px;
+      font-family: 'Lato', sans-serif;
+      font-size: 13px;
+      color: #606060;
+      outline: none;
+    }
+    .sidebar-search input::placeholder { color: #aaa; }
+    .sidebar-search input:focus { border-color: #1248A0; }
+    .sidebar-search .search-icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .results-count { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 20px; }
+    .filter-section { margin-bottom: 20px; }
+    .filter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .filter-list { display: flex; flex-direction: column; gap: 2px; }
+    .filter-item {
+      display: flex;
+      align-items: center;
+      padding: 3px 0;
+      font-size: 13px;
+      color: #434345;
+      cursor: pointer;
+      gap: 7px;
+    }
+    .filter-item input[type="checkbox"] { margin: 0; cursor: pointer; flex-shrink: 0; }
+    .filter-item-label { flex: 1; line-height: 1.3; }
+    .filter-item-count { color: #606060; font-size: 13px; flex-shrink: 0; }
+    .more-link {
+      color: #1248A0;
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 6px;
+      display: inline-block;
+    }
+    .more-link:hover { text-decoration: underline; }
+
+    /* ── Tag pills (shared) ──────────────────────────────────────── */
+    .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border: 1px solid #1248A0;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #1248A0;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .tag-pill:hover { background: #eef2fa; }
+
+    /* ── Document list panel ─────────────────────────────────────── */
+    .doc-list-panel {
+      width: 340px;
+      min-width: 340px;
+      border-left: 1px solid #E0E0E0;
+      border-right: 1px solid #E0E0E0;
+      overflow-y: auto;
+      align-self: stretch;
+    }
+
+    .doc-list-item {
+      padding: 14px 16px;
+      border-bottom: 1px solid #EFEFEF;
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+    .doc-list-item:hover { background: #f7f9fc; }
+    .doc-list-item.selected { background: #eef2fa; border-left: 3px solid #1248A0; padding-left: 13px; }
+
+    .doc-list-tags { display: flex; gap: 5px; margin-bottom: 7px; flex-wrap: wrap; }
+
+    .doc-list-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1248A0;
+      line-height: 1.4;
+      margin-bottom: 5px;
+      display: block;
+      text-decoration: none;
+    }
+    .doc-list-title:hover { text-decoration: underline; }
+
+    .doc-list-meta {
+      font-size: 12px;
+      color: #606060;
+      line-height: 1.5;
+    }
+
+    /* ── Document reader panel ───────────────────────────────────── */
+    .doc-reader-panel { flex: 1; min-width: 0; padding: 0; align-self: stretch; }
+    .doc-reader-inner { padding: 0 40px 40px 32px; }
+
+    .doc-reader-header {
+      padding-bottom: 20px;
+      border-bottom: 1px solid #E0E0E0;
+      margin-bottom: 24px;
+    }
+
+    .doc-reader-tags { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+
+    .doc-reader-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .doc-reader-meta {
+      font-size: 13px;
+      color: #606060;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .doc-reader-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .doc-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      color: #1248A0;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 5px 0;
+    }
+    .doc-action-btn:hover { text-decoration: underline; }
+    .doc-action-sep { color: #D0D0D0; }
+
+    /* Document body sections */
+    .doc-section { margin-bottom: 28px; }
+    .doc-section-heading {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .doc-body-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: #606060;
+      line-height: 22px;
+    }
+    .doc-body-text p { margin-bottom: 14px; }
+    .doc-body-text p:last-child { margin-bottom: 0; }
+    .text-link { color: #1248A0; text-decoration: none; cursor: pointer; }
+    .text-link:hover { text-decoration: underline; }
+
+    /* Citation inline */
+    .doc-citation {
+      display: inline-block;
+      background: #f0f4fb;
+      border-left: 3px solid #1248A0;
+      padding: 8px 12px;
+      margin: 10px 0;
+      font-size: 13px;
+      color: #434345;
+      line-height: 1.5;
+      border-radius: 0 3px 3px 0;
+    }
+
+    svg { display: inline-block; vertical-align: middle; }
+  </style>
+</head>
+<body>
+
+<!-- ── Top Navigation ─────────────────────────────────────────────── -->
+<nav class="top-nav">
+  <div class="nav-grid">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <rect x="0" y="0" width="4" height="4" rx="0.5" fill="white"/>
+      <rect x="6" y="0" width="4" height="4" rx="0.5" fill="white"/>
+      <rect x="12" y="0" width="4" height="4" rx="0.5" fill="white"/>
+      <rect x="0" y="6" width="4" height="4" rx="0.5" fill="white"/>
+      <rect x="6" y="6" width="4" height="4" rx="0.5" fill="white"/>
+      <rect x="12" y="6" width="4" height="4" rx="0.5" fill="white"/>
+      <rect x="0" y="12" width="4" height="4" rx="0.5" fill="white"/>
+      <rect x="6" y="12" width="4" height="4" rx="0.5" fill="white"/>
+      <rect x="12" y="12" width="4" height="4" rx="0.5" fill="white"/>
+    </svg>
+  </div>
+  <div class="nav-logo"><span>Context</span></div>
+  <div class="nav-browse">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="white" stroke-width="1.2">
+      <circle cx="9" cy="9" r="7.5"/>
+      <ellipse cx="9" cy="9" rx="3.5" ry="7.5"/>
+      <line x1="1.5" y1="9" x2="16.5" y2="9"/>
+      <line x1="2" y1="5.5" x2="16" y2="5.5"/>
+      <line x1="2" y1="12.5" x2="16" y2="12.5"/>
+    </svg>
+    <span>Browse</span>
+  </div>
+  <div class="nav-search">
+    <div class="search-bar">
+      <div class="search-dropdown">
+        Attorney
+        <svg width="9" height="5" viewBox="0 0 9 5" fill="none">
+          <path d="M1 1l3.5 3.5L8 1" stroke="#434345" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <input class="search-input" type="text" value="Kathleen Finnerty">
+      <button class="search-btn">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+          <circle cx="6.5" cy="6.5" r="5"/>
+          <line x1="10" y1="10" x2="14" y2="14"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="nav-right">
+    <div class="nav-right-item">Client</div>
+    <div class="nav-right-item">History</div>
+    <div class="nav-right-item">Help</div>
+    <div class="nav-right-item">More</div>
+  </div>
+</nav>
+
+<!-- ── Page Content ───────────────────────────────────────────────── -->
+<div class="page-content">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="#">Context</a>
+    <svg width="5" height="9" viewBox="0 0 5 9" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="1,1 4,4.5 1,8"/>
+    </svg>
+    <a href="#">Kathleen Finnerty</a>
+    <svg width="5" height="9" viewBox="0 0 5 9" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="1,1 4,4.5 1,8"/>
+    </svg>
+    <span class="breadcrumb-current">Documents</span>
+  </div>
+
+  <!-- Profile header -->
+  <div class="profile-header">
+    <div class="profile-avatar">
+      <svg width="70" height="70" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+        <rect width="70" height="70" fill="#D0CCC8"/>
+        <circle cx="35" cy="27" r="13" fill="#A89E98"/>
+        <ellipse cx="35" cy="62" rx="21" ry="16" fill="#A89E98"/>
+      </svg>
+    </div>
+    <div class="profile-info">
+      <h1>Kathleen Finnerty</h1>
+      <p>Sacramento, CA</p>
+    </div>
+  </div>
+
+  <!-- Tab bar -->
+  <div class="tab-bar">
+    <div class="tab-bar-left">
+      <a href="overview.html" class="tab">Overview</a>
+      <a href="index.html" class="tab">Argument analytics</a>
+      <a href="documents.html" class="tab active">Documents</a>
+    </div>
+    <div class="tab-bar-right">
+      <svg class="tab-icon" width="18" height="16" viewBox="0 0 18 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 3a1 1 0 011-1h5l2 2h7a1 1 0 011 1v9a1 1 0 01-1 1H2a1 1 0 01-1-1V3z"/>
+      </svg>
+      <svg class="tab-icon" width="18" height="17" viewBox="0 0 18 17" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="1" width="10" height="5" rx="1"/>
+        <rect x="4" y="10" width="10" height="6" rx="1"/>
+        <path d="M4 11H2a1 1 0 01-1-1V7a1 1 0 011-1h14a1 1 0 011 1v3a1 1 0 01-1 1h-2"/>
+        <circle cx="14" cy="8.5" r="0.8" fill="currentColor" stroke="none"/>
+      </svg>
+      <svg class="tab-icon" width="18" height="15" viewBox="0 0 18 15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="1" width="16" height="13" rx="2"/>
+        <polyline points="1,3 9,9 17,3"/>
+      </svg>
+      <svg class="tab-icon" width="16" height="18" viewBox="0 0 16 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 1v11"/>
+        <polyline points="3,8 8,13 13,8"/>
+        <path d="M1 15h14"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Main layout -->
+  <div class="main-layout">
+
+    <!-- ── Filters sidebar ───────────────────────────────────────── -->
+    <aside class="sidebar">
+      <div class="sidebar-search">
+        <input type="text" placeholder="Search within results">
+        <svg class="search-icon" width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="#aaa" stroke-width="1.5" stroke-linecap="round">
+          <circle cx="6.5" cy="6.5" r="4.5"/>
+          <line x1="9.5" y1="9.5" x2="13" y2="13"/>
+        </svg>
+      </div>
+
+      <div class="results-count">Documents (38)</div>
+
+      <!-- Document Type -->
+      <div class="filter-section">
+        <div class="filter-header">
+          Document Type
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+            <path d="M1 5L5 1L9 5" stroke="#434345" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="filter-list">
+          <div class="filter-item">
+            <input type="checkbox">
+            <span class="filter-item-label">Briefs</span>
+            <span class="filter-item-count">14</span>
+          </div>
+          <div class="filter-item">
+            <input type="checkbox">
+            <span class="filter-item-label">Motions</span>
+            <span class="filter-item-count">10</span>
+          </div>
+          <div class="filter-item">
+            <input type="checkbox">
+            <span class="filter-item-label">Responses</span>
+            <span class="filter-item-count">8</span>
+          </div>
+          <div class="filter-item">
+            <input type="checkbox">
+            <span class="filter-item-label">Orders</span>
+            <span class="filter-item-count">6</span>
+          </div>
+        </div>
+        <span class="more-link">+ More</span>
+      </div>
+
+      <!-- Date Filed -->
+      <div class="filter-section">
+        <div class="filter-header">
+          Date Filed
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+            <path d="M1 5L5 1L9 5" stroke="#434345" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="filter-list">
+          <div class="filter-item">
+            <input type="checkbox">
+            <span class="filter-item-label">2020 – Present</span>
+            <span class="filter-item-count">9</span>
+          </div>
+          <div class="filter-item">
+            <input type="checkbox">
+            <span class="filter-item-label">2010 – 2019</span>
+            <span class="filter-item-count">15</span>
+          </div>
+          <div class="filter-item">
+            <input type="checkbox">
+            <span class="filter-item-label">2000 – 2009</span>
+            <span class="filter-item-count">11</span>
+          </div>
+          <div class="filter-item">
+            <input type="checkbox">
+            <span class="filter-item-label">Before 2000</span>
+            <span class="filter-item-count">3</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Court -->
+      <div class="filter-section">
+        <div class="filter-header">
+          Court
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+            <path d="M1 5L5 1L9 5" stroke="#434345" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="filter-list">
+          <div class="filter-item">
+            <input type="checkbox">
+            <span class="filter-item-label">Supreme Court of the US</span>
+            <span class="filter-item-count">5</span>
+          </div>
+          <div class="filter-item">
+            <input type="checkbox">
+            <span class="filter-item-label">9th Circuit</span>
+            <span class="filter-item-count">12</span>
+          </div>
+          <div class="filter-item">
+            <input type="checkbox">
+            <span class="filter-item-label">U.S. Dist. Court - N.D. Cal.</span>
+            <span class="filter-item-count">14</span>
+          </div>
+        </div>
+        <span class="more-link">+ More</span>
+      </div>
+
+      <!-- Practice Area -->
+      <div class="filter-section">
+        <div class="filter-header">
+          Practice Area
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+            <path d="M1 1L5 5L9 1" stroke="#434345" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── Document list ──────────────────────────────────────────── -->
+    <div class="doc-list-panel">
+
+      <div class="doc-list-item selected">
+        <div class="doc-list-tags">
+          <span class="tag-pill">Brief</span>
+          <span class="tag-pill">Opposition</span>
+        </div>
+        <a href="#" class="doc-list-title">Defendant Thompson Inc.'s Response Brief in Opposition to Plaintiffs' Expedited Motion</a>
+        <div class="doc-list-meta">
+          Jenkins v. Oil-Titan &nbsp;|&nbsp; U.S. Dist. Court - Oregon<br>
+          Filed Jan. 31, 2005 &nbsp;|&nbsp; CT 04970124c
+        </div>
+      </div>
+
+      <div class="doc-list-item">
+        <div class="doc-list-tags">
+          <span class="tag-pill">Motion</span>
+          <span class="tag-pill">Pleading</span>
+        </div>
+        <a href="#" class="doc-list-title">Motion for Summary Judgment on Copyright Preemption Issues</a>
+        <div class="doc-list-meta">
+          Cox v. Western Oil &amp; Gas Assoc &nbsp;|&nbsp; Supreme Court of the US<br>
+          Filed Feb. 15, 1995 &nbsp;|&nbsp; CIV-473340
+        </div>
+      </div>
+
+      <div class="doc-list-item">
+        <div class="doc-list-tags">
+          <span class="tag-pill">Response</span>
+        </div>
+        <a href="#" class="doc-list-title">Browning Defendants' Response in Support of Motion to Bifurcate Claim of Willfulness</a>
+        <div class="doc-list-meta">
+          Jenkins v. Oil-Titan &nbsp;|&nbsp; U.S. Dist. Court - Oregon<br>
+          Filed Jan. 7, 2005 &nbsp;|&nbsp; CT 04970124c
+        </div>
+      </div>
+
+      <div class="doc-list-item">
+        <div class="doc-list-tags">
+          <span class="tag-pill">Motion</span>
+        </div>
+        <a href="#" class="doc-list-title">Motion to Affirm Order Granting Summary Judgment</a>
+        <div class="doc-list-meta">
+          Cox v. Western Oil &amp; Gas Assoc &nbsp;|&nbsp; 9th Circuit<br>
+          Filed Mar. 3, 1998 &nbsp;|&nbsp; CA-97-01082
+        </div>
+      </div>
+
+      <div class="doc-list-item">
+        <div class="doc-list-tags">
+          <span class="tag-pill">Brief</span>
+          <span class="tag-pill">Pleading</span>
+        </div>
+        <a href="#" class="doc-list-title">Amicus Brief in Support of Appellant's Position on Commerce Clause</a>
+        <div class="doc-list-meta">
+          Harrington v. Pacific Coast Utilities &nbsp;|&nbsp; 9th Circuit<br>
+          Filed Sep. 12, 2011 &nbsp;|&nbsp; CA-11-05339
+        </div>
+      </div>
+
+      <div class="doc-list-item">
+        <div class="doc-list-tags">
+          <span class="tag-pill">Response</span>
+          <span class="tag-pill">Opposition</span>
+        </div>
+        <a href="#" class="doc-list-title">Opposition to Motion to Strike Expert Witness Testimony</a>
+        <div class="doc-list-meta">
+          Morales v. Bay Area Transit Auth. &nbsp;|&nbsp; U.S. Dist. Court - N.D. Cal.<br>
+          Filed Nov. 4, 2014 &nbsp;|&nbsp; CV-14-02771
+        </div>
+      </div>
+
+      <div class="doc-list-item">
+        <div class="doc-list-tags">
+          <span class="tag-pill">Motion</span>
+        </div>
+        <a href="#" class="doc-list-title">Motion in Limine to Exclude Hearsay Evidence Under FRE 802</a>
+        <div class="doc-list-meta">
+          Nguyen v. Consolidated Resources LLC &nbsp;|&nbsp; U.S. Dist. Court - N.D. Cal.<br>
+          Filed Mar. 19, 2018 &nbsp;|&nbsp; CV-18-00934
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Document reader ────────────────────────────────────────── -->
+    <div class="doc-reader-panel">
+    <div class="doc-reader-inner">
+
+      <div class="doc-reader-header">
+        <div class="doc-reader-tags">
+          <span class="tag-pill">Brief</span>
+          <span class="tag-pill">Opposition</span>
+        </div>
+        <div class="doc-reader-title">
+          Defendant Thompson Inc.'s Response Brief in Opposition to Plaintiffs' Expedited Motion for an Order Granting J. Carl Cooper's Access to Defendant's Infringement Documents
+        </div>
+        <div class="doc-reader-meta">
+          Jenkins v. Oil-Titan &nbsp;|&nbsp; U.S. Dist. Court - Oregon &nbsp;|&nbsp; Filed Jan. 31, 2005 &nbsp;|&nbsp; 2005 U.S. Dist. LEXIS 2015 &nbsp;|&nbsp; CT 04970124c
+        </div>
+        <div class="doc-reader-actions">
+          <a class="doc-action-btn" href="#">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7.5 1v9"/>
+              <polyline points="3,6.5 7.5,11 12,6.5"/>
+              <path d="M1 13h13"/>
+            </svg>
+            Download
+          </a>
+          <span class="doc-action-sep">|</span>
+          <a class="doc-action-btn" href="#">
+            <svg width="16" height="15" viewBox="0 0 16 15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="1" width="14" height="11" rx="2"/>
+              <polyline points="1,3 8,8 15,3"/>
+            </svg>
+            Email
+          </a>
+          <span class="doc-action-sep">|</span>
+          <a class="doc-action-btn" href="#">
+            <svg width="16" height="15" viewBox="0 0 16 15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="1" width="10" height="5" rx="1"/>
+              <rect x="3" y="9" width="10" height="5" rx="1"/>
+              <path d="M3 10H1a1 1 0 01-1-1V6a1 1 0 011-1h14a1 1 0 011 1v3a1 1 0 01-1 1h-2"/>
+            </svg>
+            Print
+          </a>
+          <span class="doc-action-sep">|</span>
+          <a class="doc-action-btn" href="#">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="2.5" r="1.5"/>
+              <circle cx="2.5" cy="7" r="1.5"/>
+              <circle cx="11" cy="11.5" r="1.5"/>
+              <line x1="4" y1="6.5" x2="9.5" y2="3.5"/>
+              <line x1="4" y1="7.5" x2="9.5" y2="10.5"/>
+            </svg>
+            Share
+          </a>
+        </div>
+      </div>
+
+      <!-- Document body -->
+      <div class="doc-body-text">
+
+        <div class="doc-section">
+          <div class="doc-section-heading">I. Introduction</div>
+          <p>Defendant Thompson Inc. respectfully submits this Response Brief in opposition to Plaintiffs' Expedited Motion for an Order Granting J. Carl Cooper access to Defendant's confidential infringement documents. Plaintiffs have failed to demonstrate the requisite good cause to justify such extraordinary expedited discovery, and the relief sought would impose undue burden on Defendant while causing serious prejudice to ongoing licensing negotiations.</p>
+          <p>For these reasons, the oil companies' reliance upon Cannon v. New Orleans (1874) 87 U.S. (20 Wall.) 577, and Harman v. Chicago (1983) 147 U.S. 396, and upon certain dicta in Packet Co. v. Keokuk (1877) 95 U.S. 80, is misplaced. <a class="text-link" href="#">Link to the text of the note</a> neither Cannon nor Harmon nor the cited dicta in Keokuk pertain to charges to the provision of specific property or services.</p>
+        </div>
+
+        <div class="doc-section">
+          <div class="doc-section-heading">II. Background</div>
+          <p>This Court has held that where there is an exclusive private appropriation of public property, a special charge to the benefitted [*6] party is entirely proper, regardless of the nature of the commerce in which the party is engaged. <a class="text-link" href="#">(St. Louis v. Western Union Telegraph Co. (1893) 148 U.S. 92, 98–99)</a>. <a class="text-link" href="#">Link to the text of the note</a></p>
+
+          <div class="doc-citation">
+            Defendant Thompson Inc.'s Response Brief in opposition to plaintiffs' expedited motion for an order granting J. Carl Cooper's access to defendant's infringement documents.<br>
+            <em>Filed Jan. 31, 2005</em>
+          </div>
+
+          <p>Plaintiffs filed the underlying complaint on December 4, 2004, alleging willful patent infringement arising from Defendant's manufacture and sale of industrial fluid management systems. Shortly thereafter, Plaintiffs filed the present motion seeking immediate access to a broad category of documents that they characterize as "infringement documents," without defining the scope of that category or establishing relevance to any particular claim.</p>
+        </div>
+
+        <div class="doc-section">
+          <div class="doc-section-heading">III. Argument</div>
+          <p>The standard for expedited discovery requires Plaintiffs to show: (1) a likelihood of success on the merits; (2) irreparable injury absent expedited discovery; (3) the balance of hardships tips in their favor; and (4) the public interest favors the relief. <a class="text-link" href="#">Semitool, Inc. v. Tokyo Electron Am., Inc., 208 F.R.D. 273, 275–76 (N.D. Cal. 2002)</a>.</p>
+          <p>Plaintiffs have satisfied none of these requirements. The motion is devoid of any analysis of the merits of their infringement claims. Plaintiffs do not even attempt to demonstrate a likelihood of success; instead they rely on conclusory assertions that access to the documents will advance their case. This is insufficient as a matter of law. <a class="text-link" href="#">Link to the text of the note</a></p>
+          <p>Furthermore, Plaintiffs have not demonstrated that they would suffer irreparable harm if forced to proceed through normal discovery channels. Courts in this district have consistently held that a party's mere desire for early access to documents does not constitute irreparable harm sufficient to justify expedited relief.</p>
+        </div>
+
+        <div class="doc-section">
+          <div class="doc-section-heading">IV. Conclusion</div>
+          <p>For the foregoing reasons, Defendant Thompson Inc. respectfully requests that this Court deny Plaintiffs' Expedited Motion in its entirety and award Defendant its costs and fees incurred in opposing this motion pursuant to Federal Rule of Civil Procedure 37.</p>
+        </div>
+
+      </div>
+    </div><!-- doc-reader-inner -->
+    </div><!-- doc-reader-panel -->
+
+  </div>
+</div>
+
+</body>
+</html>
