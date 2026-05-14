@@ -22,9 +22,10 @@
     }
 
     /* The shared .sidebar from styles.css uses margin-right: 40px; here the
-       doc-list-panel provides its own visual separation via its borders,
-       so we remove the right margin on this page. */
-    .sidebar { margin-right: 0; }
+       doc-list-panel provides its own visual separation via its borders.
+       We zero the right margin but keep right padding so filter content
+       (especially the right-aligned counts) doesn't touch the panel border. */
+    .sidebar { margin-right: 0; padding-right: 16px; }
 
     /* ── Document list panel ─────────────────────────────────────── */
     .doc-list-panel {
@@ -560,5 +561,16 @@
   </div>
 </div>
 
+<script>
+  // Cap doc list and reader titles at 100 characters (incl. ellipsis).
+  // Preserves the full text in `title` for tooltips.
+  document.querySelectorAll('.doc-list-title, .doc-reader-title').forEach(el => {
+    const full = el.textContent.trim();
+    if (full.length > 100) {
+      el.textContent = full.slice(0, 99).trimEnd() + '…';
+      el.title = full;
+    }
+  });
+</script>
 </body>
 </html>
