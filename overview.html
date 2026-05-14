@@ -6,64 +6,15 @@
   <title>Overview | Kathleen Finnerty</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Lato', sans-serif;
-      background: #f0f0f0;
-      color: #434345;
-      font-size: 14px;
-    }
-
-    /* ── Top Navigation ──────────────────────────────────────────── */
-    .top-nav {
-      display: flex;
-      align-items: stretch;
-      height: 58px;
-      background: #373739;
-      width: 100%;
-      min-width: 900px;
-    }
-    .nav-grid { width: 40px; min-width: 40px; background: #373739; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-    .nav-logo { width: 156px; min-width: 156px; background: #434345; display: flex; align-items: center; padding-left: 15px; }
-    .nav-logo span { color: #fff; font-size: 14px; font-weight: 700; letter-spacing: 0.3px; }
-    .nav-browse { width: 155px; min-width: 155px; background: #373739; border-left: 1px solid #525253; border-right: 1px solid #525253; display: flex; align-items: center; padding-left: 14px; gap: 6px; cursor: pointer; }
-    .nav-browse span { color: #fff; font-size: 14px; }
-    .nav-search { flex: 1; background: #373739; display: flex; align-items: center; padding: 9px 16px; }
-    .search-bar { display: flex; align-items: stretch; height: 40px; background: #fff; border-radius: 2px; width: 100%; max-width: 758px; overflow: hidden; }
-    .search-dropdown { display: flex; align-items: center; padding: 0 12px; color: #434345; font-size: 14px; white-space: nowrap; border-right: 1px solid #D0D0D0; gap: 5px; cursor: pointer; background: #fff; flex-shrink: 0; }
-    .search-input { flex: 1; border: none; outline: none; color: #434345; font-family: 'Lato', sans-serif; font-size: 14px; padding: 0 12px; }
-    .search-btn { width: 44px; background: #D52B1E; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .nav-right { display: flex; align-items: stretch; margin-left: auto; }
-    .nav-right-item { display: flex; align-items: center; padding: 0 18px; color: #fff; font-size: 14px; cursor: pointer; border-left: 1px solid #525253; white-space: nowrap; }
-    .nav-right-item:hover { background: #434345; }
-
-    /* ── Page wrapper ────────────────────────────────────────────── */
+    /* ── Page-specific: Overview ─────────────────────────────────── */
     html, body { height: 100%; }
-    .page-content { background: #fff; width: 100%; min-height: calc(100vh - 58px); display: flex; flex-direction: column; }
-
-    /* ── Breadcrumb ──────────────────────────────────────────────── */
-    .breadcrumb { padding: 14px 0 0 40px; display: flex; align-items: center; gap: 8px; font-size: 14px; }
-    .breadcrumb a { color: #1248A0; text-decoration: none; }
-    .breadcrumb a:hover { text-decoration: underline; }
-    .breadcrumb-current { color: #434345; }
-
-    /* ── Profile header ──────────────────────────────────────────── */
-    .profile-header { padding: 20px 40px 20px 40px; display: flex; align-items: center; gap: 41px; }
-    .profile-avatar { width: 70px; height: 70px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: #c8c8c8; }
-    .profile-info h1 { font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
-    .profile-info p { font-size: 12px; color: #606060; }
-
-    /* ── Tab bar ─────────────────────────────────────────────────── */
-    .tab-bar { display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 1px solid #E0E0E0; padding-left: 40px; }
-    .tab-bar-left { display: flex; }
-    .tab { padding: 8px 0 10px; margin-right: 28px; font-size: 14px; color: #606060; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; text-decoration: none; display: inline-block; }
-    .tab.active { color: #D52B1E; border-bottom-color: #D52B1E; font-weight: 700; }
-    .tab:hover:not(.active) { color: #434345; }
-    .tab-bar-right { display: flex; align-items: center; gap: 14px; padding: 0 20px 10px; color: #606060; }
-    .tab-icon { cursor: pointer; color: #606060; }
-    .tab-icon:hover { color: #1248A0; }
+    .page-content {
+      min-height: calc(100vh - 58px);
+      display: flex;
+      flex-direction: column;
+    }
 
     /* ── Main content area ───────────────────────────────────────── */
     .main-content {
@@ -77,22 +28,24 @@
     /* ── 2x2 Card grid ───────────────────────────────────────────── */
     .card-grid {
       display: grid;
-      grid-template-columns: 470px 475px;
+      grid-template-columns: 1fr 1fr;
       grid-template-rows: auto auto;
       gap: 40px;
+      width: 980px;
+      max-width: 100%;
     }
 
     /* ── Shared card ─────────────────────────────────────────────── */
     .card {
       background: #fff;
-      border: 1px solid #F4F4F5;
+      border: 1px solid var(--c-border-subtle);
       border-radius: 8px;
       padding: 20px;
     }
     .card-title {
       font-size: 16px;
       font-weight: 700;
-      color: #1248A0;
+      color: var(--c-primary);
       letter-spacing: 0.01em;
       margin-bottom: 20px;
     }
@@ -109,17 +62,17 @@
       width: 70px;
       min-width: 70px;
       font-size: 13px;
-      color: #434345;
+      color: var(--c-text-body);
       font-weight: 700;
       padding-top: 1px;
     }
     .fact-value {
       flex: 1;
       font-size: 13px;
-      color: #606060;
+      color: var(--c-text-secondary);
       line-height: 1.5;
     }
-    .fact-value a { color: #1248A0; text-decoration: none; }
+    .fact-value a { color: var(--c-primary); text-decoration: none; }
     .fact-value a:hover { text-decoration: underline; }
 
     /* ── Bar chart ───────────────────────────────────────────────── */
@@ -136,21 +89,21 @@
       width: 165px;
       min-width: 165px;
       font-size: 13px;
-      color: #606060;
+      color: var(--c-text-secondary);
       line-height: 1.3;
     }
 
     .chart-bar-track {
       flex: 1;
       height: 10px;
-      background: #F0F0F0;
+      background: var(--c-border-subtle);
       border-radius: 2px;
       overflow: hidden;
     }
 
     .chart-bar-fill {
       height: 100%;
-      background: #1248A0;
+      background: var(--c-primary);
       border-radius: 2px;
     }
 
@@ -158,7 +111,7 @@
       width: 32px;
       min-width: 32px;
       font-size: 13px;
-      color: #606060;
+      color: var(--c-text-secondary);
       text-align: right;
     }
 
@@ -171,7 +124,7 @@
       gap: 20px;
       min-height: 58px;
       padding: 8px 0;
-      border-bottom: 1px solid #F4F4F5;
+      border-bottom: 1px solid var(--c-border-subtle);
     }
     .exp-row:last-child { border-bottom: none; min-height: 36px; }
 
@@ -179,7 +132,7 @@
       width: 80px;
       min-width: 80px;
       font-size: 12px;
-      color: #606060;
+      color: var(--c-text-secondary);
       padding-top: 2px;
       white-space: nowrap;
     }
@@ -188,24 +141,22 @@
       width: 16px;
       min-width: 16px;
       padding-top: 2px;
-      color: #606060;
+      color: var(--c-text-secondary);
     }
 
     .exp-details { flex: 1; }
     .exp-title {
       font-size: 13px;
-      color: #434345;
+      color: var(--c-text-body);
       font-weight: 700;
       line-height: 1.4;
       margin-bottom: 2px;
     }
     .exp-org {
       font-size: 12px;
-      color: #606060;
+      color: var(--c-text-secondary);
       line-height: 1.4;
     }
-
-    svg { display: inline-block; vertical-align: middle; }
   </style>
 </head>
 <body>
