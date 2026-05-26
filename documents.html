@@ -55,6 +55,25 @@
       align-self: stretch;
     }
 
+    /* ── Motion-chain header (sits above the list items) ─────────── */
+    .motion-chain-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--c-border-section);
+    }
+    .motion-chain-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--c-text-heading);
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      margin-bottom: 4px;
+    }
+    .motion-chain-case {
+      font-size: 13px;
+      color: var(--c-text-body);
+      line-height: 1.4;
+    }
+
     .doc-list-item {
       padding: 14px 16px;
       border-bottom: 1px solid var(--c-border-subtle);
@@ -333,82 +352,56 @@
     <!-- ── Document list ──────────────────────────────────────────── -->
     <div class="doc-list-panel">
 
-      <div class="doc-list-item">
-        <div class="doc-list-tags">
-          <span class="tag-pill">Motion</span>
-        </div>
-        <a href="#" class="doc-list-title">Motion in Limine to Exclude Hearsay Evidence Under FRE 802</a>
-        <div class="doc-list-meta">
-          Nguyen v. Consolidated Resources LLC &nbsp;|&nbsp; U.S. Dist. Court - N.D. Cal.<br>
-          Filed Mar. 19, 2018 &nbsp;|&nbsp; CV-18-00934
-        </div>
+      <div class="motion-chain-header">
+        <div class="motion-chain-eyebrow">Motion chain</div>
+        <div class="motion-chain-case">TidalWave Networks v. Vellum Semiconductor &nbsp;|&nbsp; S.D. Cal.</div>
       </div>
 
-      <div class="doc-list-item">
-        <div class="doc-list-tags">
-          <span class="tag-pill">Response</span>
-          <span class="tag-pill">Opposition</span>
-        </div>
-        <a href="#" class="doc-list-title">Opposition to Motion to Strike Expert Witness Testimony</a>
-        <div class="doc-list-meta">
-          Morales v. Bay Area Transit Auth. &nbsp;|&nbsp; U.S. Dist. Court - N.D. Cal.<br>
-          Filed Nov. 4, 2014 &nbsp;|&nbsp; CV-14-02771
-        </div>
-      </div>
-
-      <div class="doc-list-item">
-        <div class="doc-list-tags">
-          <span class="tag-pill">Brief</span>
-          <span class="tag-pill">Pleading</span>
-        </div>
-        <a href="#" class="doc-list-title">Amicus Brief in Support of Appellant's Position on Commerce Clause</a>
-        <div class="doc-list-meta">
-          Harrington v. Pacific Coast Utilities &nbsp;|&nbsp; 9th Circuit<br>
-          Filed Sep. 12, 2011 &nbsp;|&nbsp; CA-11-05339
-        </div>
-      </div>
-
+      <!-- 1. Motion to Dismiss (currently open) -->
       <div class="doc-list-item selected">
         <div class="doc-list-tags">
+          <span class="tag-pill">Motion to Dismiss</span>
+        </div>
+        <a href="#" class="doc-list-title">Defendant's Motion to Dismiss for Failure to State a Claim Under 35 U.S.C. § 101</a>
+        <div class="doc-list-meta">
+          Defendant Vellum Semiconductor, Inc.<br>
+          Filed Mar. 4, 2024
+        </div>
+      </div>
+
+      <!-- 2. Opposition -->
+      <div class="doc-list-item">
+        <div class="doc-list-tags">
           <span class="tag-pill">Opposition</span>
         </div>
-        <a href="#" class="doc-list-title">Defendant Thompson Inc.'s Response Brief in Opposition to Plaintiffs' Expedited Motion</a>
+        <a href="#" class="doc-list-title">Plaintiff's Opposition to Defendant's Motion to Dismiss Under § 101</a>
         <div class="doc-list-meta">
-          Jenkins v. Oil-Titan &nbsp;|&nbsp; U.S. Dist. Court - Oregon<br>
-          Filed Jan. 31, 2005 &nbsp;|&nbsp; CT 04970124c
+          Plaintiff TidalWave Networks, LLC<br>
+          Filed Mar. 25, 2024
         </div>
       </div>
 
+      <!-- 3. Reply -->
       <div class="doc-list-item">
         <div class="doc-list-tags">
-          <span class="tag-pill">Response</span>
+          <span class="tag-pill">Reply</span>
         </div>
-        <a href="#" class="doc-list-title">Browning Defendants' Response in Support of Motion to Bifurcate Claim of Willfulness</a>
+        <a href="#" class="doc-list-title">Defendant's Reply in Support of Motion to Dismiss Under § 101</a>
         <div class="doc-list-meta">
-          Jenkins v. Oil-Titan &nbsp;|&nbsp; U.S. Dist. Court - Oregon<br>
-          Filed Jan. 7, 2005 &nbsp;|&nbsp; CT 04970124c
+          Defendant Vellum Semiconductor, Inc.<br>
+          Filed Apr. 8, 2024
         </div>
       </div>
 
+      <!-- 4. Order -->
       <div class="doc-list-item">
         <div class="doc-list-tags">
-          <span class="tag-pill">Motion</span>
+          <span class="tag-pill">Order</span>
         </div>
-        <a href="#" class="doc-list-title">Motion to Affirm Order Granting Summary Judgment</a>
+        <a href="#" class="doc-list-title">Order Granting Defendant's Motion to Dismiss Under § 101</a>
         <div class="doc-list-meta">
-          Cox v. Western Oil &amp; Gas Assoc &nbsp;|&nbsp; 9th Circuit<br>
-          Filed Mar. 3, 1998 &nbsp;|&nbsp; CA-97-01082
-        </div>
-      </div>
-
-      <div class="doc-list-item">
-        <div class="doc-list-tags">
-          <span class="tag-pill">Motion</span>
-        </div>
-        <a href="#" class="doc-list-title">Motion for Summary Judgment on Copyright Preemption Issues</a>
-        <div class="doc-list-meta">
-          Cox v. Western Oil &amp; Gas Assoc &nbsp;|&nbsp; Supreme Court of the US<br>
-          Filed Feb. 15, 1995 &nbsp;|&nbsp; CIV-473340
+          Hon. Cynthia M. Bashant, U.S.D.J.<br>
+          Filed May 13, 2024
         </div>
       </div>
 
@@ -547,6 +540,16 @@
       requestAnimationFrame(() => target.scrollIntoView({ behavior: 'auto', block: 'start' }));
     }
   }
+
+  // PRD § 8: motion-chain items other than the currently-open one are
+  // clickable affordances but stay no-op for the demo. Suppress the
+  // href="#" default (which would scroll the panel) and log instead.
+  document.querySelectorAll('.doc-list-item:not(.selected) .doc-list-title').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log('Motion chain item clicked (stub):', link.textContent.trim());
+    });
+  });
 </script>
 </body>
 </html>
