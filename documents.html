@@ -17,21 +17,36 @@
     }
     .main-layout {
       display: flex;
-      padding: 20px 0 0 40px;
+      flex-direction: column;
+      padding: 12px 0 0 0;
       flex: 1;
     }
 
-    /* The shared .sidebar from styles.css uses margin-right: 40px; here the
-       doc-list-panel provides its own visual separation via its borders.
-       We zero the right margin but keep right padding so filter content
-       (especially the right-aligned counts) doesn't touch the panel border. */
-    .sidebar { margin-right: 0; padding-right: 16px; }
+    /* ── Back to argument list link ──────────────────────────────── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      align-self: flex-start;
+      padding: 8px 40px 12px;
+      font-size: 13px;
+      color: var(--c-primary);
+      text-decoration: none;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    /* ── Row holding the doc list + doc reader panels ────────────── */
+    .panels-row {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+      padding-left: 40px;
+    }
 
     /* ── Document list panel ─────────────────────────────────────── */
     .doc-list-panel {
       width: 340px;
       min-width: 340px;
-      border-left: 1px solid var(--c-border-section);
       border-right: 1px solid var(--c-border-section);
       overflow-y: auto;
       align-self: stretch;
@@ -260,121 +275,14 @@
   <!-- Main layout -->
   <div class="main-layout">
 
-    <!-- ── Filters sidebar ───────────────────────────────────────── -->
-    <aside class="sidebar">
-      <div class="sidebar-search">
-        <input type="text" placeholder="Search within results">
-        <svg class="search-icon" width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="#aaa" stroke-width="1.5" stroke-linecap="round">
-          <circle cx="6.5" cy="6.5" r="4.5"/>
-          <line x1="9.5" y1="9.5" x2="13" y2="13"/>
-        </svg>
-      </div>
+    <a class="back-link" href="index.html">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="7.5,2 3.5,6 7.5,10"/>
+      </svg>
+      Back to argument list
+    </a>
 
-      <div class="results-count">Documents (38)</div>
-
-      <!-- Document Type -->
-      <div class="filter-section">
-        <div class="filter-header">
-          Document Type
-          <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
-            <path d="M1 5L5 1L9 5" stroke="#434345" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="filter-list">
-          <div class="filter-item">
-            <input type="checkbox">
-            <span class="filter-item-label">Briefs</span>
-            <span class="filter-item-count">14</span>
-          </div>
-          <div class="filter-item">
-            <input type="checkbox">
-            <span class="filter-item-label">Motions</span>
-            <span class="filter-item-count">10</span>
-          </div>
-          <div class="filter-item">
-            <input type="checkbox">
-            <span class="filter-item-label">Responses</span>
-            <span class="filter-item-count">8</span>
-          </div>
-          <div class="filter-item">
-            <input type="checkbox">
-            <span class="filter-item-label">Orders</span>
-            <span class="filter-item-count">6</span>
-          </div>
-        </div>
-        <span class="more-link">+ More</span>
-      </div>
-
-      <!-- Date Filed -->
-      <div class="filter-section">
-        <div class="filter-header">
-          Date Filed
-          <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
-            <path d="M1 5L5 1L9 5" stroke="#434345" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="filter-list">
-          <div class="filter-item">
-            <input type="checkbox">
-            <span class="filter-item-label">2020 – Present</span>
-            <span class="filter-item-count">9</span>
-          </div>
-          <div class="filter-item">
-            <input type="checkbox">
-            <span class="filter-item-label">2010 – 2019</span>
-            <span class="filter-item-count">15</span>
-          </div>
-          <div class="filter-item">
-            <input type="checkbox">
-            <span class="filter-item-label">2000 – 2009</span>
-            <span class="filter-item-count">11</span>
-          </div>
-          <div class="filter-item">
-            <input type="checkbox">
-            <span class="filter-item-label">Before 2000</span>
-            <span class="filter-item-count">3</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Court -->
-      <div class="filter-section">
-        <div class="filter-header">
-          Court
-          <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
-            <path d="M1 5L5 1L9 5" stroke="#434345" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="filter-list">
-          <div class="filter-item">
-            <input type="checkbox">
-            <span class="filter-item-label">Supreme Court of the US</span>
-            <span class="filter-item-count">5</span>
-          </div>
-          <div class="filter-item">
-            <input type="checkbox">
-            <span class="filter-item-label">9th Circuit</span>
-            <span class="filter-item-count">12</span>
-          </div>
-          <div class="filter-item">
-            <input type="checkbox">
-            <span class="filter-item-label">U.S. Dist. Court - N.D. Cal.</span>
-            <span class="filter-item-count">14</span>
-          </div>
-        </div>
-        <span class="more-link">+ More</span>
-      </div>
-
-      <!-- Practice Area -->
-      <div class="filter-section">
-        <div class="filter-header">
-          Practice Area
-          <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
-            <path d="M1 1L5 5L9 1" stroke="#434345" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-      </div>
-    </aside>
+    <div class="panels-row">
 
     <!-- ── Document list ──────────────────────────────────────────── -->
     <div class="doc-list-panel">
@@ -553,6 +461,7 @@
     </div><!-- doc-reader-inner -->
     </div><!-- doc-reader-panel -->
 
+    </div><!-- panels-row -->
   </div>
 </div>
 
