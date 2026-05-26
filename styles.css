@@ -228,11 +228,13 @@ svg { display: inline-block; vertical-align: middle; }
   font-weight: 700;
 }
 .tab:hover:not(.active) { color: var(--c-text-body); }
+/* Sibling row that sits below .tab-bar (below the gray divider). */
 .tab-bar-right {
   display: flex;
+  justify-content: flex-end;
   align-items: center;
   gap: 14px;
-  padding: 0 20px 10px;
+  padding: 10px 20px;
   color: var(--c-text-secondary);
 }
 .tab-icon { cursor: pointer; color: var(--c-text-secondary); }
