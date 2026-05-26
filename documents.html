@@ -9,9 +9,9 @@
   <link rel="stylesheet" href="styles.css">
   <style>
     /* ── Page-specific: Documents ────────────────────────────────── */
-    html, body { height: 100%; }
+    html, body { height: 100%; overflow: hidden; }
     .page-content {
-      min-height: calc(100vh - 58px);
+      height: calc(100vh - 58px);
       display: flex;
       flex-direction: column;
     }
@@ -20,6 +20,7 @@
       flex-direction: column;
       padding: 12px 0 0 0;
       flex: 1;
+      min-height: 0;
     }
 
     /* ── Back to argument list link ──────────────────────────────── */
@@ -33,7 +34,9 @@
       color: var(--c-primary);
       text-decoration: none;
     }
+    .back-link svg { transition: transform 0.15s ease-out; }
     .back-link:hover { text-decoration: underline; }
+    .back-link:hover svg { transform: translateX(-3px); }
 
     /* ── Row holding the doc list + doc reader panels ────────────── */
     .panels-row {
@@ -85,7 +88,13 @@
     }
 
     /* ── Document reader panel ───────────────────────────────────── */
-    .doc-reader-panel { flex: 1; min-width: 0; padding: 0; align-self: stretch; }
+    .doc-reader-panel {
+      flex: 1;
+      min-width: 0;
+      padding: 0;
+      align-self: stretch;
+      overflow-y: auto;
+    }
     .doc-reader-inner { padding: 0 40px 40px 32px; }
 
     .doc-reader-header {
@@ -219,19 +228,6 @@
 <!-- ── Page Content ───────────────────────────────────────────────── -->
 <div class="page-content">
 
-  <!-- Breadcrumb -->
-  <div class="breadcrumb">
-    <a href="#">Context</a>
-    <svg width="5" height="9" viewBox="0 0 5 9" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="1,1 4,4.5 1,8"/>
-    </svg>
-    <a href="#">Kathleen Finnerty</a>
-    <svg width="5" height="9" viewBox="0 0 5 9" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="1,1 4,4.5 1,8"/>
-    </svg>
-    <span class="breadcrumb-current">Documents</span>
-  </div>
-
   <!-- Profile header -->
   <div class="profile-header">
     <div class="profile-avatar">
@@ -247,9 +243,10 @@
   <div class="tab-bar">
     <div class="tab-bar-left">
       <a href="overview.html" class="tab">Overview</a>
-      <a href="index.html" class="tab">Argument analytics</a>
-      <a href="documents.html" class="tab active">Documents</a>
+      <a href="index.html" class="tab active">Argument analytics</a>
+      <a href="documents.html" class="tab">Documents</a>
     </div>
+    <!-- Utility actions (floats below the tab-bar divider) -->
     <div class="tab-bar-right">
       <svg class="tab-icon" width="18" height="16" viewBox="0 0 18 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M1 3a1 1 0 011-1h5l2 2h7a1 1 0 011 1v9a1 1 0 01-1 1H2a1 1 0 01-1-1V3z"/>
@@ -287,6 +284,41 @@
     <!-- ── Document list ──────────────────────────────────────────── -->
     <div class="doc-list-panel">
 
+      <div class="doc-list-item">
+        <div class="doc-list-tags">
+          <span class="tag-pill">Motion</span>
+        </div>
+        <a href="#" class="doc-list-title">Motion in Limine to Exclude Hearsay Evidence Under FRE 802</a>
+        <div class="doc-list-meta">
+          Nguyen v. Consolidated Resources LLC &nbsp;|&nbsp; U.S. Dist. Court - N.D. Cal.<br>
+          Filed Mar. 19, 2018 &nbsp;|&nbsp; CV-18-00934
+        </div>
+      </div>
+
+      <div class="doc-list-item">
+        <div class="doc-list-tags">
+          <span class="tag-pill">Response</span>
+          <span class="tag-pill">Opposition</span>
+        </div>
+        <a href="#" class="doc-list-title">Opposition to Motion to Strike Expert Witness Testimony</a>
+        <div class="doc-list-meta">
+          Morales v. Bay Area Transit Auth. &nbsp;|&nbsp; U.S. Dist. Court - N.D. Cal.<br>
+          Filed Nov. 4, 2014 &nbsp;|&nbsp; CV-14-02771
+        </div>
+      </div>
+
+      <div class="doc-list-item">
+        <div class="doc-list-tags">
+          <span class="tag-pill">Brief</span>
+          <span class="tag-pill">Pleading</span>
+        </div>
+        <a href="#" class="doc-list-title">Amicus Brief in Support of Appellant's Position on Commerce Clause</a>
+        <div class="doc-list-meta">
+          Harrington v. Pacific Coast Utilities &nbsp;|&nbsp; 9th Circuit<br>
+          Filed Sep. 12, 2011 &nbsp;|&nbsp; CA-11-05339
+        </div>
+      </div>
+
       <div class="doc-list-item selected">
         <div class="doc-list-tags">
           <span class="tag-pill">Opposition</span>
@@ -295,17 +327,6 @@
         <div class="doc-list-meta">
           Jenkins v. Oil-Titan &nbsp;|&nbsp; U.S. Dist. Court - Oregon<br>
           Filed Jan. 31, 2005 &nbsp;|&nbsp; CT 04970124c
-        </div>
-      </div>
-
-      <div class="doc-list-item">
-        <div class="doc-list-tags">
-          <span class="tag-pill">Motion</span>
-        </div>
-        <a href="#" class="doc-list-title">Motion for Summary Judgment on Copyright Preemption Issues</a>
-        <div class="doc-list-meta">
-          Cox v. Western Oil &amp; Gas Assoc &nbsp;|&nbsp; Supreme Court of the US<br>
-          Filed Feb. 15, 1995 &nbsp;|&nbsp; CIV-473340
         </div>
       </div>
 
@@ -333,36 +354,12 @@
 
       <div class="doc-list-item">
         <div class="doc-list-tags">
-          <span class="tag-pill">Brief</span>
-          <span class="tag-pill">Pleading</span>
-        </div>
-        <a href="#" class="doc-list-title">Amicus Brief in Support of Appellant's Position on Commerce Clause</a>
-        <div class="doc-list-meta">
-          Harrington v. Pacific Coast Utilities &nbsp;|&nbsp; 9th Circuit<br>
-          Filed Sep. 12, 2011 &nbsp;|&nbsp; CA-11-05339
-        </div>
-      </div>
-
-      <div class="doc-list-item">
-        <div class="doc-list-tags">
-          <span class="tag-pill">Response</span>
-          <span class="tag-pill">Opposition</span>
-        </div>
-        <a href="#" class="doc-list-title">Opposition to Motion to Strike Expert Witness Testimony</a>
-        <div class="doc-list-meta">
-          Morales v. Bay Area Transit Auth. &nbsp;|&nbsp; U.S. Dist. Court - N.D. Cal.<br>
-          Filed Nov. 4, 2014 &nbsp;|&nbsp; CV-14-02771
-        </div>
-      </div>
-
-      <div class="doc-list-item">
-        <div class="doc-list-tags">
           <span class="tag-pill">Motion</span>
         </div>
-        <a href="#" class="doc-list-title">Motion in Limine to Exclude Hearsay Evidence Under FRE 802</a>
+        <a href="#" class="doc-list-title">Motion for Summary Judgment on Copyright Preemption Issues</a>
         <div class="doc-list-meta">
-          Nguyen v. Consolidated Resources LLC &nbsp;|&nbsp; U.S. Dist. Court - N.D. Cal.<br>
-          Filed Mar. 19, 2018 &nbsp;|&nbsp; CV-18-00934
+          Cox v. Western Oil &amp; Gas Assoc &nbsp;|&nbsp; Supreme Court of the US<br>
+          Filed Feb. 15, 1995 &nbsp;|&nbsp; CIV-473340
         </div>
       </div>
 
