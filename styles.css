@@ -203,6 +203,7 @@ svg { display: inline-block; vertical-align: middle; }
 
 /* ── Tab bar ────────────────────────────────────────────────── */
 .tab-bar {
+  position: relative;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -228,10 +229,12 @@ svg { display: inline-block; vertical-align: middle; }
   font-weight: 700;
 }
 .tab:hover:not(.active) { color: var(--c-text-body); }
-/* Sibling row that sits below .tab-bar (below the gray divider). */
+/* Floats just below the tab-bar's gray divider without taking flow space. */
 .tab-bar-right {
+  position: absolute;
+  top: 100%;
+  right: 0;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
   gap: 14px;
   padding: 10px 20px;
