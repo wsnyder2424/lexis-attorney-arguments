@@ -66,6 +66,48 @@
 
     .content-area { flex: 1; min-width: 0; }
 
+    /* ── Active filter pills (above the result cards) ─────────── */
+    .active-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .active-filters-label {
+      font-size: 13px;
+      color: var(--c-text-secondary);
+      margin-right: 4px;
+    }
+    .active-filter-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 4px 4px 12px;
+      background: var(--c-blue-selected);
+      border: 1px solid rgba(18, 72, 160, 0.4);
+      border-radius: 20px;
+      font-size: 12px;
+      color: var(--c-primary);
+      white-space: nowrap;
+    }
+    .active-filter-x {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--c-primary);
+      cursor: pointer;
+    }
+    .active-filter-x:hover {
+      background: rgba(18, 72, 160, 0.15);
+    }
+
     .argument-card { margin-bottom: 60px; position: relative; }
 
     .argument-tags {
@@ -404,6 +446,29 @@
     <!-- ── Content Area ──────────────────────────────────────────── -->
     <div class="content-area">
 
+      <!-- Active filter pills (PRD § 3 — appear after IP and S.D. Cal. are applied) -->
+      <div class="active-filters" id="active-filters">
+        <span class="active-filters-label">Filtered by:</span>
+        <span class="active-filter-pill" data-filter="practice-area" data-label="Intellectual Property">
+          Intellectual Property
+          <button type="button" class="active-filter-x" aria-label="Remove Intellectual Property filter">
+            <svg width="8" height="8" viewBox="0 0 8 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+              <line x1="1" y1="1" x2="7" y2="7"/>
+              <line x1="7" y1="1" x2="1" y2="7"/>
+            </svg>
+          </button>
+        </span>
+        <span class="active-filter-pill" data-filter="jurisdiction" data-label="S.D. Cal.">
+          S.D. Cal.
+          <button type="button" class="active-filter-x" aria-label="Remove S.D. Cal. filter">
+            <svg width="8" height="8" viewBox="0 0 8 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+              <line x1="1" y1="1" x2="7" y2="7"/>
+              <line x1="7" y1="1" x2="1" y2="7"/>
+            </svg>
+          </button>
+        </span>
+      </div>
+
       <!-- Card 1: TidalWave Networks v. Vellum Semiconductor (the demo clicks this) -->
       <div class="argument-card">
         <div class="argument-tags">
@@ -671,8 +736,52 @@
       if (parent) { currentView = parent; render(); }
     });
 
+    // Allow external code (active-filter pill ×) to uncheck a leaf by label.
+    document.addEventListener('juris:uncheck', (e) => {
+      const label = e.detail && e.detail.label;
+      if (!label) return;
+      for (const key of [...checked]) {
+        if (key.endsWith('|' + label)) checked.delete(key);
+      }
+      // Also unset the per-item `checked` flag in the views data so the
+      // pre-seeded S.D. Cal. doesn't re-add itself on the next render.
+      for (const view of Object.values(views)) {
+        for (const item of view.items) {
+          if (item.label === label) item.checked = false;
+        }
+      }
+      render();
+    });
+
     render();
   })();
+
+  // Active filter pills: × removes the pill from the row and unchecks the
+  // corresponding sidebar control (real filter logic is out of scope).
+  document.querySelectorAll('.active-filter-x').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pill = btn.closest('.active-filter-pill');
+      if (!pill) return;
+      const filter = pill.dataset.filter;
+      const label  = pill.dataset.label;
+
+      if (filter === 'practice-area') {
+        // Sidebar Practice Area checkboxes are static; find by label text.
+        const row = [...document.querySelectorAll('.filter-section .filter-item')]
+          .find(el => el.querySelector('.filter-item-label')?.textContent === label
+                   && !el.classList.contains('jurisdiction-item'));
+        row?.querySelector('input')?.dispatchEvent(new Event('change', { bubbles: true }));
+        const cb = row?.querySelector('input');
+        if (cb) cb.checked = false;
+      } else if (filter === 'jurisdiction') {
+        // Jurisdiction is rendered by an IIFE that owns its own state, so
+        // tell it to uncheck the leaf rather than reaching into its DOM.
+        document.dispatchEvent(new CustomEvent('juris:uncheck', { detail: { label } }));
+      }
+
+      pill.remove();
+    });
+  });
 </script>
 </body>
 </html>
