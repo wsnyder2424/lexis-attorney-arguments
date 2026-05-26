@@ -224,7 +224,7 @@ svg { display: inline-block; vertical-align: middle; }
   display: inline-block;
 }
 .tab.active {
-  color: var(--c-accent);
+  color: var(--c-text-body);
   border-bottom-color: var(--c-accent);
   font-weight: 700;
 }
