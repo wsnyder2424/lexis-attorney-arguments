@@ -149,6 +149,14 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
+    .doc-subsection-heading {
+      font-size: 13px;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--c-text-body);
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
     .doc-body-text {
       font-size: 14px;
       font-weight: 500;
@@ -157,6 +165,47 @@
     }
     .doc-body-text p { margin-bottom: 14px; }
     .doc-body-text p:last-child { margin-bottom: 0; }
+
+    /* Surfaced argument (the highlighted passage the algorithm picked) */
+    .surfaced-argument-wrapper {
+      margin: 16px 0 18px;
+      scroll-margin-top: 24px;
+    }
+    .surfaced-argument-label {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--c-text-body);
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      background: #FFF3B0;
+      padding: 3px 8px;
+      border-radius: 2px;
+      margin-bottom: 6px;
+    }
+    .surfaced-argument {
+      background: #FFF3B0;
+      padding: 10px 14px;
+      border-radius: 2px;
+      margin: 0;
+      color: var(--c-text-body);
+    }
+
+    /* Signature block at the end of the brief */
+    .doc-signature {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--c-border-subtle);
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--c-text-body);
+    }
+    .doc-signature p { margin-bottom: 0; }
+    .doc-sig-block {
+      margin-top: 16px;
+      margin-left: 50%;
+    }
+    .doc-sig-block p.doc-sig-spaced { margin-top: 14px; }
 
     /* Citation inline */
     .doc-citation {
@@ -371,13 +420,14 @@
 
       <div class="doc-reader-header">
         <div class="doc-reader-tags">
-          <span class="tag-pill">Opposition</span>
+          <span class="tag-pill selected">Motion</span>
+          <span class="tag-pill">Brief</span>
         </div>
         <div class="doc-reader-title">
-          Defendant Thompson Inc.'s Response Brief in Opposition to Plaintiffs' Expedited Motion for an Order Granting J. Carl Cooper's Access to Defendant's Infringement Documents
+          Defendant's Motion to Dismiss for Failure to State a Claim Under 35 U.S.C. § 101
         </div>
         <div class="doc-reader-meta">
-          Jenkins v. Oil-Titan &nbsp;|&nbsp; U.S. Dist. Court - Oregon &nbsp;|&nbsp; Filed Jan. 31, 2005 &nbsp;|&nbsp; 2005 U.S. Dist. LEXIS 2015 &nbsp;|&nbsp; CT 04970124c
+          TidalWave Networks, LLC v. Vellum Semiconductor, Inc. &nbsp;|&nbsp; S.D. Cal. &nbsp;|&nbsp; Filed Mar. 4, 2024 &nbsp;|&nbsp; 3:23-cv-02841-BAS-DEB
         </div>
         <div class="doc-reader-actions">
           <a class="doc-action-btn" href="#">
@@ -419,37 +469,53 @@
         </div>
       </div>
 
-      <!-- Document body -->
+      <!-- Document body (PRD § 9 stub: TidalWave Networks v. Vellum, § 101 MTD) -->
       <div class="doc-body-text">
 
         <div class="doc-section">
           <div class="doc-section-heading">I. Introduction</div>
-          <p>Defendant Thompson Inc. respectfully submits this Response Brief in opposition to Plaintiffs' Expedited Motion for an Order Granting J. Carl Cooper access to Defendant's confidential infringement documents. Plaintiffs have failed to demonstrate the requisite good cause to justify such extraordinary expedited discovery, and the relief sought would impose undue burden on Defendant while causing serious prejudice to ongoing licensing negotiations.</p>
-          <p>For these reasons, the oil companies' reliance upon Cannon v. New Orleans (1874) 87 U.S. (20 Wall.) 577, and Harman v. Chicago (1983) 147 U.S. 396, and upon certain dicta in Packet Co. v. Keokuk (1877) 95 U.S. 80, is misplaced. <a class="text-link" href="#">Link to the text of the note</a> neither Cannon nor Harmon nor the cited dicta in Keokuk pertain to charges to the provision of specific property or services.</p>
+          <p>Plaintiff's complaint asserts infringement of <a class="text-link" href="#">U.S. Patent No. 10,847,482</a> ("the '482 patent"). The asserted claims, on their face, are directed to nothing more than the long-standing practice of collecting, analyzing, and displaying network performance data. Reciting that practice on a generic computer does not make it patent-eligible. The complaint should be dismissed under Rule 12(b)(6) because the asserted claims are ineligible for patent protection under 35 U.S.C. § 101.</p>
         </div>
 
         <div class="doc-section">
-          <div class="doc-section-heading">II. Background</div>
-          <p>This Court has held that where there is an exclusive private appropriation of public property, a special charge to the benefitted [*6] party is entirely proper, regardless of the nature of the commerce in which the party is engaged. <a class="text-link" href="#">(St. Louis v. Western Union Telegraph Co. (1893) 148 U.S. 92, 98–99)</a>. <a class="text-link" href="#">Link to the text of the note</a></p>
-
-          <div class="doc-citation">
-            Defendant Thompson Inc.'s Response Brief in opposition to plaintiffs' expedited motion for an order granting J. Carl Cooper's access to defendant's infringement documents.<br>
-            <em>Filed Jan. 31, 2005</em>
-          </div>
-
-          <p>Plaintiffs filed the underlying complaint on December 4, 2004, alleging willful patent infringement arising from Defendant's manufacture and sale of industrial fluid management systems. Shortly thereafter, Plaintiffs filed the present motion seeking immediate access to a broad category of documents that they characterize as "infringement documents," without defining the scope of that category or establishing relevance to any particular claim.</p>
+          <div class="doc-section-heading">II. The Asserted Patent</div>
+          <p>The '482 patent is titled "System and Method for Monitoring Network Performance." Independent Claim 1 recites a method comprising: (a) receiving network performance data from one or more endpoints; (b) aggregating the received data; (c) comparing the aggregated data against a stored performance baseline; and (d) displaying the comparison result on a user interface. The remaining asserted claims add only generic computing components, such as a processor, memory, and a network interface.</p>
         </div>
 
         <div class="doc-section">
           <div class="doc-section-heading">III. Argument</div>
-          <p>The standard for expedited discovery requires Plaintiffs to show: (1) a likelihood of success on the merits; (2) irreparable injury absent expedited discovery; (3) the balance of hardships tips in their favor; and (4) the public interest favors the relief. <a class="text-link" href="#">Semitool, Inc. v. Tokyo Electron Am., Inc., 208 F.R.D. 273, 275–76 (N.D. Cal. 2002)</a>.</p>
-          <p>Plaintiffs have satisfied none of these requirements. The motion is devoid of any analysis of the merits of their infringement claims. Plaintiffs do not even attempt to demonstrate a likelihood of success; instead they rely on conclusory assertions that access to the documents will advance their case. This is insufficient as a matter of law. <a class="text-link" href="#">Link to the text of the note</a></p>
-          <p>Furthermore, Plaintiffs have not demonstrated that they would suffer irreparable harm if forced to proceed through normal discovery channels. Courts in this district have consistently held that a party's mere desire for early access to documents does not constitute irreparable harm sufficient to justify expedited relief.</p>
+
+          <div class="doc-subsection-heading">A. The Two-Step Alice Framework Governs This Motion</div>
+          <p>The Supreme Court's decision in <a class="text-link" href="#">Alice Corp. v. CLS Bank International</a> sets out the framework for evaluating patent eligibility under § 101. At step one, the court determines whether the claims are directed to a patent-ineligible concept such as an abstract idea. If they are, at step two, the court asks whether the claim elements, individually or as an ordered combination, recite an "inventive concept" sufficient to transform the abstract idea into a patent-eligible application.</p>
+
+          <div class="doc-subsection-heading">B. The Asserted Claims Are Directed to an Abstract Idea</div>
+          <div class="surfaced-argument-wrapper" id="argument-1">
+            <div class="surfaced-argument-label">Surfaced argument</div>
+            <p class="surfaced-argument">The asserted claims of the '482 patent are directed to the abstract idea of collecting, analyzing, and displaying network performance data, and they recite nothing more than generic computer components performing routine functions. Under the two-step framework of <a class="text-link" href="#">Alice Corp. v. CLS Bank International</a>, the claims are ineligible for patent protection under 35 U.S.C. § 101. The Federal Circuit has repeatedly held that claims directed to gathering data, applying a comparison, and presenting the result fall squarely within the abstract-idea category, and the '482 claims add no technical improvement that would distinguish them from that line of authority.</p>
+          </div>
+
+          <div class="doc-subsection-heading">C. The Claims Recite No Inventive Concept at Step Two</div>
+          <p>At step two of the Alice inquiry, the asserted claims recite only well-understood, routine, and conventional computer components performing well-understood, routine, and conventional functions. Receiving data over a network, storing it in memory, comparing it against a baseline value, and rendering the result on a display were each standard computing operations long before the priority date of the '482 patent. Reciting these operations together, in the order one would naturally perform them, does not supply the inventive concept that § 101 requires.</p>
+
+          <div class="doc-subsection-heading">D. The Claims Are Properly Resolved at the Pleading Stage</div>
+          <p>Resolution of § 101 eligibility at the pleading stage is appropriate where, as here, the patent's intrinsic record forecloses any plausible inventive-concept theory. The Federal Circuit has affirmed Rule 12(b)(6) dismissals in materially similar circumstances, and judicial economy favors resolving eligibility before the parties incur the substantial expense of claim construction and discovery.</p>
         </div>
 
         <div class="doc-section">
           <div class="doc-section-heading">IV. Conclusion</div>
-          <p>For the foregoing reasons, Defendant Thompson Inc. respectfully requests that this Court deny Plaintiffs' Expedited Motion in its entirety and award Defendant its costs and fees incurred in opposing this motion pursuant to Federal Rule of Civil Procedure 37.</p>
+          <p>For the foregoing reasons, Defendant respectfully requests that the Court dismiss Plaintiff's complaint in its entirety, with prejudice, under 35 U.S.C. § 101.</p>
+        </div>
+
+        <div class="doc-signature">
+          <p>Dated: March 4, 2024</p>
+          <div class="doc-sig-block">
+            <p>Respectfully submitted,</p>
+            <p><strong>REED &amp; MARSTON LLP</strong></p>
+            <p class="doc-sig-spaced">By: /s/ <strong>Catherine Finnerty</strong></p>
+            <p>Catherine Finnerty</p>
+            <p>Attorney for Defendant</p>
+            <p>Vellum Semiconductor, Inc.</p>
+          </div>
         </div>
 
       </div>
@@ -470,6 +536,17 @@
       el.title = full;
     }
   });
+
+  // If the URL has an argument anchor (e.g., #argument-1), scroll it into
+  // view inside the doc-reader-panel on load. The native :target jump
+  // doesn't scroll within an overflow:auto container, so we do it explicitly
+  // after one rAF so layout is settled.
+  if (location.hash) {
+    const target = document.querySelector(location.hash);
+    if (target) {
+      requestAnimationFrame(() => target.scrollIntoView({ behavior: 'auto', block: 'start' }));
+    }
+  }
 </script>
 </body>
 </html>
