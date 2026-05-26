@@ -14,6 +14,56 @@
       padding: 20px 0 40px 40px;
     }
 
+    /* ── Hierarchical Jurisdiction filter ─────────────────────── */
+    .jurisdiction-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+    .jurisdiction-breadcrumb[hidden] { display: none; }
+    .jurisdiction-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--c-primary);
+      cursor: pointer;
+      font-family: 'Lato', sans-serif;
+      font-size: 13px;
+    }
+    .jurisdiction-back:hover { text-decoration: underline; }
+    .jurisdiction-path {
+      color: var(--c-text-body);
+      font-weight: 700;
+    }
+    .jurisdiction-item.is-drillable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .jurisdiction-item.is-drillable .filter-item-label {
+      color: var(--c-primary);
+    }
+    .jurisdiction-item.is-drillable:hover .filter-item-label {
+      text-decoration: underline;
+    }
+    .jurisdiction-item.is-drillable:focus-visible {
+      outline: 2px solid var(--c-primary);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+    .jurisdiction-item.is-highlight .filter-item-label {
+      font-weight: 700;
+    }
+    .jurisdiction-chevron {
+      margin-left: 4px;
+      color: var(--c-text-secondary);
+      flex-shrink: 0;
+    }
+
     .content-area { flex: 1; min-width: 0; }
 
     .argument-card { margin-bottom: 60px; position: relative; }
@@ -329,95 +379,24 @@
         </div>
       </div>
 
-      <!-- Jurisdiction -->
-      <div class="filter-section">
+      <!-- Jurisdiction (hierarchical, drill-down — populated by inline JS) -->
+      <div class="filter-section" id="jurisdiction-section">
         <div class="filter-header">
           Jurisdiction
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
             <path d="M1 5L5 1L9 5" stroke="#434345" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <div class="filter-list">
-          <!-- Federal -->
-          <div class="filter-item">
-            <input type="checkbox">
-            <span class="filter-item-label">U.S. Supreme Court</span>
-            <span class="filter-item-count">2</span>
-          </div>
-          <div class="filter-item">
-            <input type="checkbox">
-            <span class="filter-item-label">9th Circuit Court of Appeals</span>
-            <span class="filter-item-count">8</span>
-          </div>
-          <div class="filter-item">
-            <input type="checkbox">
-            <span class="filter-item-label">U.S. District Courts</span>
-            <span class="filter-item-count">21</span>
-          </div>
-          <div class="filter-children filter-list">
-            <div class="filter-item">
-              <input type="checkbox">
-              <span class="filter-item-label">N.D. Cal.</span>
-              <span class="filter-item-count">11</span>
-            </div>
-            <div class="filter-item">
-              <input type="checkbox">
-              <span class="filter-item-label">E.D. Cal.</span>
-              <span class="filter-item-count">3</span>
-            </div>
-            <div class="filter-item">
-              <input type="checkbox">
-              <span class="filter-item-label">C.D. Cal.</span>
-              <span class="filter-item-count">6</span>
-            </div>
-            <div class="filter-item">
-              <input type="checkbox" checked>
-              <span class="filter-item-label">S.D. Cal.</span>
-            </div>
-          </div>
-          <!-- State -->
-          <div class="filter-item">
-            <input type="checkbox">
-            <span class="filter-item-label">California Supreme Court</span>
-            <span class="filter-item-count">4</span>
-          </div>
-          <div class="filter-item">
-            <input type="checkbox">
-            <span class="filter-item-label">California Courts of Appeal</span>
-            <span class="filter-item-count">17</span>
-          </div>
-          <div class="filter-children filter-list">
-            <div class="filter-item">
-              <input type="checkbox">
-              <span class="filter-item-label">First Dist. (S.F.)</span>
-              <span class="filter-item-count">5</span>
-            </div>
-            <div class="filter-item">
-              <input type="checkbox">
-              <span class="filter-item-label">Second Dist. (L.A.)</span>
-              <span class="filter-item-count">7</span>
-            </div>
-            <div class="filter-item">
-              <input type="checkbox">
-              <span class="filter-item-label">Third Dist. (Sacramento)</span>
-              <span class="filter-item-count">3</span>
-            </div>
-            <div class="filter-item">
-              <input type="checkbox">
-              <span class="filter-item-label">Fourth Dist.</span>
-            </div>
-            <div class="filter-item">
-              <input type="checkbox">
-              <span class="filter-item-label">Fifth Dist. (Fresno)</span>
-              <span class="filter-item-count">1</span>
-            </div>
-            <div class="filter-item">
-              <input type="checkbox">
-              <span class="filter-item-label">Sixth Dist. (San Jose)</span>
-            </div>
-          </div>
+        <div class="jurisdiction-breadcrumb" hidden>
+          <button type="button" class="jurisdiction-back" aria-label="Back">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6.5,2 2.5,5 6.5,8"/>
+            </svg>
+            Back
+          </button>
+          <span class="jurisdiction-path"></span>
         </div>
-        <span class="more-link">+ More</span>
+        <div class="filter-list jurisdiction-list"></div>
       </div>
 
     </aside>
@@ -557,5 +536,143 @@
   </div>
 </div>
 
+<script>
+  // Hierarchical Jurisdiction filter (PRD § 3 step 3).
+  // Drills top → Federal → 9th Circuit → S.D. Cal. The State branch is
+  // wired but stubbed shallow since the demo path doesn't go there.
+  (() => {
+    const views = {
+      top: {
+        path: [],
+        items: [
+          { label: 'Federal', count: 31, drillTo: 'federal' },
+          { label: 'State',   count: 21, drillTo: 'state' },
+        ],
+      },
+      federal: {
+        path: ['Federal'],
+        items: [
+          { label: '1st Circuit' },
+          { label: '2nd Circuit' },
+          { label: '3rd Circuit' },
+          { label: '4th Circuit' },
+          { label: '5th Circuit' },
+          { label: '6th Circuit' },
+          { label: '7th Circuit' },
+          { label: '8th Circuit' },
+          { label: '9th Circuit', count: 23, drillTo: 'federal-9thcir', highlight: true },
+          { label: '10th Circuit' },
+          { label: '11th Circuit' },
+          { label: 'D.C. Circuit' },
+          { label: 'Federal Circuit', count: 1 },
+        ],
+      },
+      'federal-9thcir': {
+        path: ['Federal', '9th Circuit'],
+        items: [
+          { label: 'C.D. Cal.', count: 6 },
+          { label: 'E.D. Cal.', count: 3 },
+          { label: 'N.D. Cal.', count: 11 },
+          { label: 'S.D. Cal.', count: 6, checked: true },
+          { label: 'D. Ariz.' },
+          { label: 'D. Nev.' },
+          { label: 'D. Or.' },
+          { label: 'W.D. Wash.' },
+          { label: 'E.D. Wash.' },
+          { label: 'D. Idaho' },
+          { label: 'D. Mont.' },
+          { label: 'D. Alaska' },
+          { label: 'D. Haw.' },
+        ],
+      },
+      state: {
+        path: ['State'],
+        items: [
+          { label: 'California Supreme Court', count: 4 },
+          { label: 'California Courts of Appeal', count: 17, drillTo: 'state-coa' },
+        ],
+      },
+      'state-coa': {
+        path: ['State', 'California Courts of Appeal'],
+        items: [
+          { label: 'First Dist. (S.F.)',        count: 5 },
+          { label: 'Second Dist. (L.A.)',       count: 7 },
+          { label: 'Third Dist. (Sacramento)',  count: 3 },
+          { label: 'Fourth Dist.' },
+          { label: 'Fifth Dist. (Fresno)',      count: 1 },
+          { label: 'Sixth Dist. (San Jose)' },
+        ],
+      },
+    };
+    const parentMap = {
+      federal: 'top',
+      state: 'top',
+      'federal-9thcir': 'federal',
+      'state-coa': 'state',
+    };
+
+    const listEl  = document.querySelector('.jurisdiction-list');
+    const crumbEl = document.querySelector('.jurisdiction-breadcrumb');
+    if (!listEl || !crumbEl) return;
+    const pathEl  = crumbEl.querySelector('.jurisdiction-path');
+    const backBtn = crumbEl.querySelector('.jurisdiction-back');
+
+    // Start in the demo's end state: drilled into S.D. Cal., box pre-checked.
+    let currentView = 'federal-9thcir';
+    const checked = new Set();
+
+    function render() {
+      const view = views[currentView];
+      crumbEl.hidden = view.path.length === 0;
+      if (!crumbEl.hidden) pathEl.textContent = view.path.join(' › ');
+      listEl.innerHTML = '';
+
+      for (const item of view.items) {
+        const row = document.createElement('div');
+        row.className = 'filter-item jurisdiction-item';
+        if (item.highlight) row.classList.add('is-highlight');
+
+        const countHTML = item.count !== undefined
+          ? `<span class="filter-item-count">${item.count}</span>`
+          : '';
+
+        if (item.drillTo) {
+          row.classList.add('is-drillable');
+          row.tabIndex = 0;
+          row.innerHTML = `
+            <span class="filter-item-label">${item.label}</span>
+            ${countHTML}
+            <svg class="jurisdiction-chevron" width="6" height="10" viewBox="0 0 6 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 5,5 1,9"/></svg>
+          `;
+          const drill = () => { currentView = item.drillTo; render(); };
+          row.addEventListener('click', drill);
+          row.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); drill(); }
+          });
+        } else {
+          const key = `${currentView}|${item.label}`;
+          if (item.checked) checked.add(key);
+          const isChecked = checked.has(key);
+          row.innerHTML = `
+            <input type="checkbox" ${isChecked ? 'checked' : ''}>
+            <span class="filter-item-label">${item.label}</span>
+            ${countHTML}
+          `;
+          row.querySelector('input').addEventListener('change', (e) => {
+            if (e.target.checked) checked.add(key); else checked.delete(key);
+          });
+        }
+        listEl.appendChild(row);
+      }
+    }
+
+    backBtn.addEventListener('click', () => {
+      const parent = parentMap[currentView];
+      if (parent) { currentView = parent; render(); }
+    });
+
+    render();
+  })();
+</script>
 </body>
 </html>
