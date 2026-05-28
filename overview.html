@@ -106,6 +106,9 @@
       background: var(--c-primary);
       border-radius: 2px;
     }
+    /* Per-chart color overrides */
+    .card--area-of-law .chart-bar-fill { background: #5265EC; }
+    .card--court       .chart-bar-fill { background: #3BC8AE; }
 
     .chart-value {
       width: 32px;
@@ -286,7 +289,7 @@
       </div>
 
       <!-- ── Card 2: Litigation Events by Area of Law ────────────── -->
-      <div class="card">
+      <div class="card card--area-of-law">
         <div class="card-title">Litigation Events by Area of Law</div>
         <div class="chart-rows">
           <div class="chart-row">
@@ -386,7 +389,7 @@
       </div>
 
       <!-- ── Card 4: Litigation Events by Court ─────────────────── -->
-      <div class="card">
+      <div class="card card--court">
         <div class="card-title">Litigation Events by Court</div>
         <div class="chart-rows">
           <div class="chart-row">
