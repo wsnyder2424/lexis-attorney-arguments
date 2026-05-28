@@ -696,7 +696,9 @@
   // matching that doctype is always present and rendered in the .selected
   // state. The card then picks 0–3 additional pills from the others, and
   // all pills render in the canonical order: motion, opposition,
-  // response, order.
+  // response, order. Non-selected pills get a .pill-tooltip wrapper with
+  // a .citation-popup that surfaces the full legal name of the
+  // hypothetical filing on hover.
   (() => {
     const ORDER = [
       { key: 'motion',     label: 'Motion' },
@@ -704,10 +706,38 @@
       { key: 'response',   label: 'Response' },
       { key: 'order',      label: 'Order' },
     ];
+    const esc = s => s.replace(/[&<>"']/g, m => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[m]));
+    // Build tooltip strings for the three non-selected pill types based on
+    // the card's own argument title (so the tooltips look case-specific).
+    function buildTooltips(title, doctype) {
+      if (doctype === 'motion') {
+        const body = title.replace(/^Defendant'?s\s+/i, '');
+        return {
+          opposition: `Plaintiff's Opposition to Defendant's ${body}`,
+          response:   `Defendant's Reply in Support of ${body}`,
+          order:      `Order Granting Defendant's ${body}`,
+        };
+      }
+      if (doctype === 'opposition') {
+        const m = title.match(/Opposition\s+to\s+(.+)$/i);
+        const parent = m ? m[1] : "Plaintiff's Motion";
+        const parentBody = parent.replace(/^Plaintiff'?s\s+/i, '');
+        return {
+          motion:   parent,
+          response: `Plaintiff's Reply in Support of ${parentBody}`,
+          order:    `Order Denying ${parent}`,
+        };
+      }
+      return {};
+    }
     document.querySelectorAll('.argument-card[data-doctype]').forEach(card => {
       const docType = card.dataset.doctype;
       const tagsEl  = card.querySelector('.argument-tags');
       if (!tagsEl) return;
+      const title = (card.querySelector('.argument-title')?.textContent || '').trim();
+      const tooltips = buildTooltips(title, docType);
       const others = ORDER.map(p => p.key).filter(k => k !== docType);
       // Fisher–Yates shuffle
       for (let i = others.length - 1; i > 0; i--) {
@@ -718,7 +748,14 @@
       const present = new Set([docType, ...others.slice(0, extraCount)]);
       tagsEl.innerHTML = ORDER
         .filter(p => present.has(p.key))
-        .map(p => `<span class="tag-pill${p.key === docType ? ' selected' : ''}">${p.label}</span>`)
+        .map(p => {
+          if (p.key === docType) {
+            return `<span class="tag-pill selected">${p.label}</span>`;
+          }
+          const tt = tooltips[p.key];
+          if (!tt) return `<span class="tag-pill">${p.label}</span>`;
+          return `<span class="pill-tooltip"><span class="tag-pill">${p.label}</span><div class="citation-popup"><span class="citation-popup-title">${esc(tt)}</span></div></span>`;
+        })
         .join('\n          ');
     });
   })();
