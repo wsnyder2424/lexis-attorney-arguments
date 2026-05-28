@@ -91,6 +91,18 @@
       gap: 6px;
       margin-bottom: 10px;
     }
+    /* Non-selected pills on argument cards are informational (they only
+       surface a tooltip on hover) — not links. Strip the link affordances:
+       no border, body text color, no cursor pointer, no hover fill. */
+    .argument-tags .tag-pill:not(.selected) {
+      border: none;
+      color: var(--c-text-body);
+      cursor: default;
+      padding: 4px 11px;
+    }
+    .argument-tags .tag-pill:not(.selected):hover {
+      background: transparent;
+    }
 
     .argument-title {
       font-size: 15px;
