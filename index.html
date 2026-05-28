@@ -15,31 +15,6 @@
     }
 
     /* ── Hierarchical Jurisdiction filter ─────────────────────── */
-    .jurisdiction-breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-      font-size: 13px;
-    }
-    .jurisdiction-breadcrumb[hidden] { display: none; }
-    .jurisdiction-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: none;
-      border: none;
-      padding: 0;
-      color: var(--c-primary);
-      cursor: pointer;
-      font-family: 'Lato', sans-serif;
-      font-size: 13px;
-    }
-    .jurisdiction-back:hover { text-decoration: underline; }
-    .jurisdiction-path {
-      color: var(--c-text-body);
-      font-weight: 700;
-    }
     .jurisdiction-item.is-drillable {
       cursor: pointer;
       user-select: none;
@@ -84,7 +59,7 @@
       align-items: center;
       gap: 4px;
       padding: 4px 4px 4px 12px;
-      background: var(--c-blue-selected);
+      background: transparent;
       border: 1px solid rgba(18, 72, 160, 0.4);
       border-radius: 20px;
       font-size: 12px;
@@ -153,6 +128,7 @@
       text-decoration: none;
     }
     .category-tag:hover { text-decoration: underline; }
+    .cat-chev { margin-left: 5px; vertical-align: middle; }
     .cat-sep { color: #C0C0C0; margin: 0 2px; }
 
     .argument-body {
@@ -342,22 +318,23 @@
           <div class="filter-item">
             <input type="checkbox">
             <span class="filter-item-label">Briefs</span>
-            <span class="filter-item-count">16</span>
+            <span class="filter-item-count">1</span>
           </div>
           <div class="filter-item">
             <input type="checkbox">
             <span class="filter-item-label">Pleadings</span>
-            <span class="filter-item-count">10</span>
+            <span class="filter-item-count">0</span>
           </div>
           <div class="filter-item">
             <input type="checkbox">
             <span class="filter-item-label">Motions</span>
-            <span class="filter-item-count">8</span>
+            <span class="filter-item-count">5</span>
           </div>
           <div class="filter-children filter-list">
             <div class="filter-item">
               <input type="checkbox">
               <span class="filter-item-label">Motion for Judgment on the Pleadings</span>
+              <span class="filter-item-count">1</span>
             </div>
             <div class="filter-item">
               <input type="checkbox">
@@ -386,37 +363,37 @@
           <div class="filter-item">
             <input type="checkbox">
             <span class="filter-item-label">Civil Rights</span>
-            <span class="filter-item-count">8</span>
+            <span class="filter-item-count">0</span>
           </div>
           <div class="filter-item">
             <input type="checkbox">
             <span class="filter-item-label">Commercial Litigation</span>
-            <span class="filter-item-count">16</span>
+            <span class="filter-item-count">0</span>
           </div>
           <div class="filter-item">
             <input type="checkbox">
             <span class="filter-item-label">Contract Disputes</span>
-            <span class="filter-item-count">5</span>
+            <span class="filter-item-count">0</span>
           </div>
           <div class="filter-item">
             <input type="checkbox">
             <span class="filter-item-label">Employment Law</span>
-            <span class="filter-item-count">24</span>
+            <span class="filter-item-count">0</span>
           </div>
           <div class="filter-item">
             <input type="checkbox">
             <span class="filter-item-label">ERISA</span>
-            <span class="filter-item-count">2</span>
+            <span class="filter-item-count">0</span>
           </div>
           <div class="filter-item">
             <input type="checkbox" checked>
             <span class="filter-item-label">Intellectual Property</span>
-            <span class="filter-item-count">34</span>
+            <span class="filter-item-count">6</span>
           </div>
           <div class="filter-item">
             <input type="checkbox">
             <span class="filter-item-label">Labor &amp; Employment</span>
-            <span class="filter-item-count">4</span>
+            <span class="filter-item-count">0</span>
           </div>
         </div>
       </div>
@@ -428,15 +405,6 @@
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
             <path d="M1 5L5 1L9 5" stroke="#434345" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-        </div>
-        <div class="jurisdiction-breadcrumb" hidden>
-          <button type="button" class="jurisdiction-back" aria-label="Back">
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="6.5,2 2.5,5 6.5,8"/>
-            </svg>
-            Back
-          </button>
-          <span class="jurisdiction-path"></span>
         </div>
         <div class="filter-list jurisdiction-list"></div>
       </div>
@@ -473,18 +441,15 @@
       <div class="argument-card">
         <div class="argument-tags">
           <span class="tag-pill selected">Motion</span>
-          <span class="tag-pill">Brief</span>
         </div>
         <a href="documents.html#argument-1" class="argument-title">Defendant's Motion to Dismiss for Failure to State a Claim Under 35 U.S.C. § 101</a>
         <div class="argument-meta">
           TidalWave Networks, LLC v. Vellum Semiconductor, Inc. &nbsp;|&nbsp; S.D. Cal. &nbsp;|&nbsp; March 4, 2024 &nbsp;|&nbsp; 3:23-cv-02841-BAS-DEB
         </div>
         <div class="argument-categories">
-          <span class="category-crumb">Intellectual Property &gt;</span>
-          <a class="category-tag" href="#">Patents &#x25BE;</a>
+          <a class="category-tag" href="#">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
           <span class="cat-sep">|</span>
-          <span class="category-crumb">Patent Law &gt;</span>
-          <a class="category-tag" href="#">§ 101 Eligibility &#x25BE;</a>
+          <a class="category-tag" href="#">Patent Law<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
         </div>
         <p class="argument-body">
           The asserted claims of the '482 patent are directed to the abstract idea of collecting, analyzing, and displaying network performance data, and they recite nothing more than generic computer components performing routine functions. Under the two-step framework of <a class="text-link" href="#">Alice Corp. v. CLS Bank International</a>, the claims are ineligible for patent protection under 35 U.S.C. § 101.
@@ -501,11 +466,9 @@
           Helix Diagnostics, Inc. v. Vellum Semiconductor, Inc. &nbsp;|&nbsp; S.D. Cal. &nbsp;|&nbsp; November 12, 2023 &nbsp;|&nbsp; 3:22-cv-01957-BAS-DEB
         </div>
         <div class="argument-categories">
-          <span class="category-crumb">Intellectual Property &gt;</span>
-          <a class="category-tag" href="#">Patents &#x25BE;</a>
+          <a class="category-tag" href="#">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
           <span class="cat-sep">|</span>
-          <span class="category-crumb">Claim Construction &gt;</span>
-          <a class="category-tag" href="#">Markman &#x25BE;</a>
+          <a class="category-tag" href="#">Claim Construction<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
         </div>
         <p class="argument-body">
           Plaintiff's infringement theory requires reading the limitation "in real time" out of the asserted claims entirely. The intrinsic record makes clear that "in real time" has a definite meaning, and the accused product's batch-processing architecture cannot satisfy that limitation under any reasonable claim construction.
@@ -522,11 +485,9 @@
           Marin Apparel Co. v. Crestline Outfitters, Inc. &nbsp;|&nbsp; S.D. Cal. &nbsp;|&nbsp; July 19, 2023 &nbsp;|&nbsp; 3:23-cv-00614-LAB-AGS
         </div>
         <div class="argument-categories">
-          <span class="category-crumb">Intellectual Property &gt;</span>
-          <a class="category-tag" href="#">Trademarks &#x25BE;</a>
+          <a class="category-tag" href="#">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
           <span class="cat-sep">|</span>
-          <span class="category-crumb">Trademark Law &gt;</span>
-          <a class="category-tag" href="#">Likelihood of Confusion &#x25BE;</a>
+          <a class="category-tag" href="#">Trademark Law<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
         </div>
         <p class="argument-body">
           The <a class="text-link" href="#">Sleekcraft</a> factors weigh decisively against any finding of likelihood of confusion. The parties' marks differ in sight, sound, and meaning; the goods travel in distinct channels of trade; and Plaintiff has pleaded no facts suggesting actual confusion in the four years the marks have coexisted in the marketplace.
@@ -537,18 +498,15 @@
       <div class="argument-card">
         <div class="argument-tags">
           <span class="tag-pill">Opposition</span>
-          <span class="tag-pill">Brief</span>
         </div>
         <a href="#" class="argument-title">Defendant's Opposition to Plaintiff's Motion for Preliminary Injunction</a>
         <div class="argument-meta">
           Sierra BioCore, Inc. v. Vellum Semiconductor, Inc. &nbsp;|&nbsp; S.D. Cal. &nbsp;|&nbsp; April 27, 2023 &nbsp;|&nbsp; 3:23-cv-00298-CAB-JLB
         </div>
         <div class="argument-categories">
-          <span class="category-crumb">Intellectual Property &gt;</span>
-          <a class="category-tag" href="#">Trade Secrets &#x25BE;</a>
+          <a class="category-tag" href="#">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
           <span class="cat-sep">|</span>
-          <span class="category-crumb">Remedies &gt;</span>
-          <a class="category-tag" href="#">Preliminary Injunction &#x25BE;</a>
+          <a class="category-tag" href="#">Remedies<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
         </div>
         <p class="argument-body">
           Plaintiff cannot establish irreparable harm because the information it claims as a trade secret was disclosed in two of Plaintiff's own published patent applications more than two years before the alleged misappropriation. Public disclosure forecloses trade-secret protection as a matter of law.
@@ -565,11 +523,9 @@
           Lattice Audio LLC v. Northbeam Studios, Inc. &nbsp;|&nbsp; S.D. Cal. &nbsp;|&nbsp; January 23, 2023 &nbsp;|&nbsp; 3:22-cv-01443-JLS-MSB
         </div>
         <div class="argument-categories">
-          <span class="category-crumb">Intellectual Property &gt;</span>
-          <a class="category-tag" href="#">Copyright &#x25BE;</a>
+          <a class="category-tag" href="#">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
           <span class="cat-sep">|</span>
-          <span class="category-crumb">Copyright Law &gt;</span>
-          <a class="category-tag" href="#">Fair Use &#x25BE;</a>
+          <a class="category-tag" href="#">Copyright Law<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
         </div>
         <p class="argument-body">
           Defendant's use of short audio excerpts is transformative under the framework articulated in <a class="text-link" href="#">Andy Warhol Foundation v. Goldsmith</a>. The excerpts serve a different expressive purpose, occupy a fraction of the original works, and do not function as a market substitute for Plaintiff's licensing program.
@@ -586,11 +542,9 @@
           Argent Microsystems, Inc. v. Vellum Semiconductor, Inc. &nbsp;|&nbsp; S.D. Cal. &nbsp;|&nbsp; September 8, 2022 &nbsp;|&nbsp; 3:21-cv-01829-GPC-DEB
         </div>
         <div class="argument-categories">
-          <span class="category-crumb">Intellectual Property &gt;</span>
-          <a class="category-tag" href="#">Patents &#x25BE;</a>
+          <a class="category-tag" href="#">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
           <span class="cat-sep">|</span>
-          <span class="category-crumb">Patent Damages &gt;</span>
-          <a class="category-tag" href="#">Entire Market Value Rule &#x25BE;</a>
+          <a class="category-tag" href="#">Patent Damages<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
         </div>
         <p class="argument-body">
           Plaintiff's expert applies the entire market value rule to a multi-component product without the predicate showing that the patented feature drives consumer demand. The Federal Circuit has rejected exactly this approach in <a class="text-link" href="#">LaserDynamics v. Quanta Computer</a>, and the opinion should be excluded in its entirety.
@@ -608,88 +562,72 @@
   (() => {
     const views = {
       top: {
-        path: [],
         items: [
-          { label: 'Federal', count: 31, drillTo: 'federal' },
-          { label: 'State',   count: 21, drillTo: 'state' },
+          { label: 'Federal', count: 6, drillTo: 'federal' },
+          { label: 'State',   count: 0, drillTo: 'state' },
         ],
       },
       federal: {
-        path: ['Federal'],
         items: [
-          { label: '1st Circuit' },
-          { label: '2nd Circuit' },
-          { label: '3rd Circuit' },
-          { label: '4th Circuit' },
-          { label: '5th Circuit' },
-          { label: '6th Circuit' },
-          { label: '7th Circuit' },
-          { label: '8th Circuit' },
-          { label: '9th Circuit', count: 23, drillTo: 'federal-9thcir', highlight: true },
-          { label: '10th Circuit' },
-          { label: '11th Circuit' },
-          { label: 'D.C. Circuit' },
-          { label: 'Federal Circuit', count: 1 },
+          { label: '1st Circuit',     count: 0 },
+          { label: '2nd Circuit',     count: 0 },
+          { label: '3rd Circuit',     count: 0 },
+          { label: '4th Circuit',     count: 0 },
+          { label: '5th Circuit',     count: 0 },
+          { label: '6th Circuit',     count: 0 },
+          { label: '7th Circuit',     count: 0 },
+          { label: '8th Circuit',     count: 0 },
+          { label: '9th Circuit',     count: 6, drillTo: 'federal-9thcir', highlight: true },
+          { label: '10th Circuit',    count: 0 },
+          { label: '11th Circuit',    count: 0 },
+          { label: 'D.C. Circuit',    count: 0 },
+          { label: 'Federal Circuit', count: 0 },
         ],
       },
       'federal-9thcir': {
-        path: ['Federal', '9th Circuit'],
         items: [
-          { label: 'C.D. Cal.', count: 6 },
-          { label: 'E.D. Cal.', count: 3 },
-          { label: 'N.D. Cal.', count: 11 },
+          { label: 'C.D. Cal.', count: 0 },
+          { label: 'E.D. Cal.', count: 0 },
+          { label: 'N.D. Cal.', count: 0 },
           { label: 'S.D. Cal.', count: 6, checked: true },
-          { label: 'D. Ariz.' },
-          { label: 'D. Nev.' },
-          { label: 'D. Or.' },
-          { label: 'W.D. Wash.' },
-          { label: 'E.D. Wash.' },
-          { label: 'D. Idaho' },
-          { label: 'D. Mont.' },
-          { label: 'D. Alaska' },
-          { label: 'D. Haw.' },
+          { label: 'D. Ariz.',  count: 0 },
         ],
       },
       state: {
-        path: ['State'],
         items: [
-          { label: 'California Supreme Court', count: 4 },
-          { label: 'California Courts of Appeal', count: 17, drillTo: 'state-coa' },
+          { label: 'California Supreme Court',     count: 0 },
+          { label: 'California Courts of Appeal',  count: 0, drillTo: 'state-coa' },
         ],
       },
       'state-coa': {
-        path: ['State', 'California Courts of Appeal'],
         items: [
-          { label: 'First Dist. (S.F.)',        count: 5 },
-          { label: 'Second Dist. (L.A.)',       count: 7 },
-          { label: 'Third Dist. (Sacramento)',  count: 3 },
-          { label: 'Fourth Dist.' },
-          { label: 'Fifth Dist. (Fresno)',      count: 1 },
-          { label: 'Sixth Dist. (San Jose)' },
+          { label: 'First Dist. (S.F.)',       count: 0 },
+          { label: 'Second Dist. (L.A.)',      count: 0 },
+          { label: 'Third Dist. (Sacramento)', count: 0 },
+          { label: 'Fourth Dist.',             count: 0 },
+          { label: 'Fifth Dist. (Fresno)',     count: 0 },
+          { label: 'Sixth Dist. (San Jose)',   count: 0 },
         ],
       },
     };
-    const parentMap = {
-      federal: 'top',
-      state: 'top',
-      'federal-9thcir': 'federal',
-      'state-coa': 'state',
-    };
-
-    const listEl  = document.querySelector('.jurisdiction-list');
-    const crumbEl = document.querySelector('.jurisdiction-breadcrumb');
-    if (!listEl || !crumbEl) return;
-    const pathEl  = crumbEl.querySelector('.jurisdiction-path');
-    const backBtn = crumbEl.querySelector('.jurisdiction-back');
+    const listEl = document.querySelector('.jurisdiction-list');
+    if (!listEl) return;
 
     // Start in the demo's end state: drilled into S.D. Cal., box pre-checked.
     let currentView = 'federal-9thcir';
     const checked = new Set();
 
+    // Wipe the seeded checked flag for `label` so it doesn't re-seed on render.
+    function clearSeed(label) {
+      for (const view of Object.values(views)) {
+        for (const item of view.items) {
+          if (item.label === label) item.checked = false;
+        }
+      }
+    }
+
     function render() {
       const view = views[currentView];
-      crumbEl.hidden = view.path.length === 0;
-      if (!crumbEl.hidden) pathEl.textContent = view.path.join(' › ');
       listEl.innerHTML = '';
 
       for (const item of view.items) {
@@ -724,17 +662,20 @@
             ${countHTML}
           `;
           row.querySelector('input').addEventListener('change', (e) => {
-            if (e.target.checked) checked.add(key); else checked.delete(key);
+            if (e.target.checked) {
+              checked.add(key);
+            } else {
+              checked.delete(key);
+              clearSeed(item.label);
+              // Unclicking a leaf is the "navigate away" gesture — pop back to top.
+              currentView = 'top';
+              render();
+            }
           });
         }
         listEl.appendChild(row);
       }
     }
-
-    backBtn.addEventListener('click', () => {
-      const parent = parentMap[currentView];
-      if (parent) { currentView = parent; render(); }
-    });
 
     // Allow external code (active-filter pill ×) to uncheck a leaf by label.
     document.addEventListener('juris:uncheck', (e) => {
@@ -743,13 +684,8 @@
       for (const key of [...checked]) {
         if (key.endsWith('|' + label)) checked.delete(key);
       }
-      // Also unset the per-item `checked` flag in the views data so the
-      // pre-seeded S.D. Cal. doesn't re-add itself on the next render.
-      for (const view of Object.values(views)) {
-        for (const item of view.items) {
-          if (item.label === label) item.checked = false;
-        }
-      }
+      clearSeed(label);
+      currentView = 'top';
       render();
     });
 
