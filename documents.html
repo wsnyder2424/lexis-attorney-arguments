@@ -83,8 +83,6 @@
     .doc-list-item:hover { background: var(--c-blue-hover); }
     .doc-list-item.selected {
       background: var(--c-highlight);
-      border-left: 3px solid var(--c-primary);
-      padding-left: 13px;
     }
 
     .doc-list-tags { display: flex; gap: 5px; margin-bottom: 7px; flex-wrap: wrap; }
@@ -190,22 +188,10 @@
       margin: 16px 0 18px;
       scroll-margin-top: 24px;
     }
-    .surfaced-argument-label {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--c-text-body);
-      text-transform: uppercase;
-      letter-spacing: 0.7px;
-      background: var(--c-highlight);
-      padding: 3px 8px;
-      border-radius: 2px;
-      margin-bottom: 6px;
-    }
     .surfaced-argument {
       background: var(--c-highlight);
       padding: 10px 14px;
-      border-radius: 2px;
+      border-radius: 8px;
       margin: 0;
       color: var(--c-text-body);
     }
@@ -483,7 +469,6 @@
 
           <div class="doc-subsection-heading">B. The Asserted Claims Are Directed to an Abstract Idea</div>
           <div class="surfaced-argument-wrapper" id="argument-1">
-            <div class="surfaced-argument-label">Surfaced argument</div>
             <p class="surfaced-argument">The asserted claims of the '482 patent are directed to the abstract idea of collecting, analyzing, and displaying network performance data, and they recite nothing more than generic computer components performing routine functions. Under the two-step framework of <a class="text-link" href="#">Alice Corp. v. CLS Bank International</a>, the claims are ineligible for patent protection under 35 U.S.C. § 101. The Federal Circuit has repeatedly held that claims directed to gathering data, applying a comparison, and presenting the result fall squarely within the abstract-idea category, and the '482 claims add no technical improvement that would distinguish them from that line of authority.</p>
           </div>
 
