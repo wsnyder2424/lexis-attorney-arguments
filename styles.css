@@ -307,12 +307,15 @@ svg { display: inline-block; vertical-align: middle; }
 .filter-item {
   display: flex;
   align-items: center;
-  padding: 3px 0;
+  padding: 4px 6px;
+  margin: 0 -6px;
+  border-radius: 4px;
   font-size: 13px;
   color: var(--c-text-body);
   cursor: pointer;
   gap: 7px;
 }
+.filter-item:hover { background: var(--c-highlight); }
 .filter-item input[type="checkbox"] {
   margin: 0;
   cursor: pointer;
@@ -322,7 +325,44 @@ svg { display: inline-block; vertical-align: middle; }
 .filter-item-label { flex: 1; line-height: 1.3; }
 .filter-item-count { color: var(--c-text-secondary); font-size: 13px; flex-shrink: 0; }
 
-.filter-children { padding-left: 18px; margin-top: 2px; }
+/* Hierarchy: +/- toggle button before a parent item's checkbox */
+.filter-toggle {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--c-text-secondary);
+  flex-shrink: 0;
+}
+.filter-toggle::before,
+.filter-toggle::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+}
+.filter-toggle::before {
+  left: 1px;
+  right: 1px;
+  top: 50%;
+  height: 1.5px;
+  transform: translateY(-50%);
+}
+.filter-toggle::after {
+  top: 1px;
+  bottom: 1px;
+  left: 50%;
+  width: 1.5px;
+  transform: translateX(-50%);
+}
+/* When expanded, hide the vertical bar so the icon reads as a minus. */
+.filter-toggle.is-expanded::after { display: none; }
+
+.filter-children { padding-left: 22px; margin-top: 2px; }
+.filter-children[hidden] { display: none; }
 
 .more-link {
   color: var(--c-primary);

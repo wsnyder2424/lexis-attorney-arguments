@@ -326,6 +326,7 @@
             <span class="filter-item-count">0</span>
           </div>
           <div class="filter-item">
+            <button type="button" class="filter-toggle is-expanded" aria-label="Collapse Motions"></button>
             <input type="checkbox">
             <span class="filter-item-label">Motions</span>
             <span class="filter-item-count">5</span>
@@ -386,9 +387,32 @@
             <span class="filter-item-count">2</span>
           </div>
           <div class="filter-item">
+            <button type="button" class="filter-toggle is-expanded" aria-label="Collapse Intellectual Property"></button>
             <input type="checkbox" checked>
             <span class="filter-item-label">Intellectual Property</span>
             <span class="filter-item-count">34</span>
+          </div>
+          <div class="filter-children filter-list">
+            <div class="filter-item">
+              <input type="checkbox">
+              <span class="filter-item-label">Patents</span>
+              <span class="filter-item-count">3</span>
+            </div>
+            <div class="filter-item">
+              <input type="checkbox">
+              <span class="filter-item-label">Trademarks</span>
+              <span class="filter-item-count">1</span>
+            </div>
+            <div class="filter-item">
+              <input type="checkbox">
+              <span class="filter-item-label">Copyright</span>
+              <span class="filter-item-count">1</span>
+            </div>
+            <div class="filter-item">
+              <input type="checkbox">
+              <span class="filter-item-label">Trade Secrets</span>
+              <span class="filter-item-count">1</span>
+            </div>
           </div>
           <div class="filter-item">
             <input type="checkbox">
@@ -759,6 +783,25 @@
         .join('\n          ');
     });
   })();
+
+  // Sidebar filter +/- toggles. Each .filter-toggle controls the
+  // immediately-following .filter-children block. .is-expanded means
+  // children are visible (icon reads as minus); without the class,
+  // children hide and the icon reads as plus.
+  document.querySelectorAll('.filter-toggle').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      btn.classList.toggle('is-expanded');
+      const expanded = btn.classList.contains('is-expanded');
+      const item = btn.closest('.filter-item');
+      const children = item && item.nextElementSibling;
+      if (children && children.classList.contains('filter-children')) {
+        children.hidden = !expanded;
+      }
+      btn.setAttribute('aria-label', (expanded ? 'Collapse ' : 'Expand ') +
+        (item.querySelector('.filter-item-label')?.textContent || ''));
+    });
+  });
 
   // Active filter pills: × removes the pill from the row and unchecks the
   // corresponding sidebar control (real filter logic is out of scope).
