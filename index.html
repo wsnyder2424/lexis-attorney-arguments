@@ -135,13 +135,76 @@
       display: inline-flex;
       align-items: center;
       gap: 3px;
+      padding: 4px 10px;
+      border: 1px solid transparent;
+      border-radius: 4px;
       color: var(--c-primary);
       cursor: pointer;
       text-decoration: none;
+      background: transparent;
     }
-    .category-tag:hover { text-decoration: underline; }
-    .cat-chev { margin-left: 5px; vertical-align: middle; }
+    .cat-chev {
+      margin-left: 5px;
+      vertical-align: middle;
+      transition: transform 0.15s ease-out;
+    }
     .cat-sep { color: #C0C0C0; margin: 0 2px; }
+
+    /* Topic-tag dropdown (per Figma node 3617:23275) — on hover, the
+       tag pills up with a border and shows a breadcrumb panel below. */
+    .cat-dropdown {
+      position: relative;
+      display: inline-flex;
+    }
+    .cat-dropdown:hover > .category-tag,
+    .cat-dropdown:focus-within > .category-tag {
+      color: var(--c-text-heading);
+      border-color: var(--c-border-strong);
+      background: #fff;
+      text-decoration: none;
+    }
+    .cat-dropdown:hover > .category-tag .cat-chev,
+    .cat-dropdown:focus-within > .category-tag .cat-chev {
+      transform: rotate(180deg);
+    }
+    .cat-dropdown-panel {
+      position: absolute;
+      top: calc(100% - 1px);
+      left: 0;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 8px 12px;
+      background: #fff;
+      border: 1px solid var(--c-border-strong);
+      border-radius: 0 4px 4px 4px;
+      font-size: 13px;
+      white-space: nowrap;
+      z-index: 20;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(2px);
+      transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+    }
+    .cat-dropdown:hover > .cat-dropdown-panel,
+    .cat-dropdown:focus-within > .cat-dropdown-panel {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .cat-crumb-link {
+      color: var(--c-primary);
+      text-decoration: none;
+    }
+    .cat-crumb-link:hover { text-decoration: underline; }
+    .cat-crumb-sep {
+      color: var(--c-text-secondary);
+      margin: 0 6px;
+    }
+    .cat-crumb-current {
+      color: var(--c-text-heading);
+      font-weight: 700;
+    }
 
     .argument-body {
       font-size: 14px;
@@ -482,9 +545,9 @@
           TidalWave Networks, LLC v. Vellum Semiconductor, Inc. &nbsp;|&nbsp; S.D. Cal. &nbsp;|&nbsp; March 4, 2024 &nbsp;|&nbsp; 3:23-cv-02841-BAS-DEB
         </div>
         <div class="argument-categories">
-          <a class="category-tag" href="#">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
+          <a class="category-tag" href="#" data-path="Civil Procedure / Substantive Law / Intellectual Property">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
           <span class="cat-sep">|</span>
-          <a class="category-tag" href="#">Patent Law<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
+          <a class="category-tag" href="#" data-path="Intellectual Property / Patents / Patent Law">Patent Law<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
         </div>
         <p class="argument-body">
           The asserted claims of the '482 patent are directed to the abstract idea of collecting, analyzing, and displaying network performance data, and they recite nothing more than generic computer components performing routine functions. Under the two-step framework of <a class="text-link" href="#">Alice Corp. v. CLS Bank International</a>, the claims are ineligible for patent protection under 35 U.S.C. § 101.
@@ -501,9 +564,9 @@
           Helix Diagnostics, Inc. v. Vellum Semiconductor, Inc. &nbsp;|&nbsp; S.D. Cal. &nbsp;|&nbsp; November 12, 2023 &nbsp;|&nbsp; 3:22-cv-01957-BAS-DEB
         </div>
         <div class="argument-categories">
-          <a class="category-tag" href="#">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
+          <a class="category-tag" href="#" data-path="Civil Procedure / Substantive Law / Intellectual Property">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
           <span class="cat-sep">|</span>
-          <a class="category-tag" href="#">Claim Construction<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
+          <a class="category-tag" href="#" data-path="Patent Law / Patents / Claim Construction">Claim Construction<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
         </div>
         <p class="argument-body">
           Plaintiff's infringement theory requires reading the limitation "in real time" out of the asserted claims entirely. The intrinsic record makes clear that "in real time" has a definite meaning, and the accused product's batch-processing architecture cannot satisfy that limitation under any reasonable claim construction.
@@ -520,9 +583,9 @@
           Marin Apparel Co. v. Crestline Outfitters, Inc. &nbsp;|&nbsp; S.D. Cal. &nbsp;|&nbsp; July 19, 2023 &nbsp;|&nbsp; 3:23-cv-00614-LAB-AGS
         </div>
         <div class="argument-categories">
-          <a class="category-tag" href="#">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
+          <a class="category-tag" href="#" data-path="Civil Procedure / Substantive Law / Intellectual Property">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
           <span class="cat-sep">|</span>
-          <a class="category-tag" href="#">Trademark Law<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
+          <a class="category-tag" href="#" data-path="Intellectual Property / Trademarks / Trademark Law">Trademark Law<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
         </div>
         <p class="argument-body">
           The <a class="text-link" href="#">Sleekcraft</a> factors weigh decisively against any finding of likelihood of confusion. The parties' marks differ in sight, sound, and meaning; the goods travel in distinct channels of trade; and Plaintiff has pleaded no facts suggesting actual confusion in the four years the marks have coexisted in the marketplace.
@@ -539,9 +602,9 @@
           Sierra BioCore, Inc. v. Vellum Semiconductor, Inc. &nbsp;|&nbsp; S.D. Cal. &nbsp;|&nbsp; April 27, 2023 &nbsp;|&nbsp; 3:23-cv-00298-CAB-JLB
         </div>
         <div class="argument-categories">
-          <a class="category-tag" href="#">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
+          <a class="category-tag" href="#" data-path="Civil Procedure / Substantive Law / Intellectual Property">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
           <span class="cat-sep">|</span>
-          <a class="category-tag" href="#">Remedies<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
+          <a class="category-tag" href="#" data-path="Civil Procedure / Pretrial Matters / Remedies">Remedies<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
         </div>
         <p class="argument-body">
           Plaintiff cannot establish irreparable harm because the information it claims as a trade secret was disclosed in two of Plaintiff's own published patent applications more than two years before the alleged misappropriation. Public disclosure forecloses trade-secret protection as a matter of law.
@@ -558,9 +621,9 @@
           Lattice Audio LLC v. Northbeam Studios, Inc. &nbsp;|&nbsp; S.D. Cal. &nbsp;|&nbsp; January 23, 2023 &nbsp;|&nbsp; 3:22-cv-01443-JLS-MSB
         </div>
         <div class="argument-categories">
-          <a class="category-tag" href="#">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
+          <a class="category-tag" href="#" data-path="Civil Procedure / Substantive Law / Intellectual Property">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
           <span class="cat-sep">|</span>
-          <a class="category-tag" href="#">Copyright Law<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
+          <a class="category-tag" href="#" data-path="Intellectual Property / Copyright / Copyright Law">Copyright Law<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
         </div>
         <p class="argument-body">
           Defendant's use of short audio excerpts is transformative under the framework articulated in <a class="text-link" href="#">Andy Warhol Foundation v. Goldsmith</a>. The excerpts serve a different expressive purpose, occupy a fraction of the original works, and do not function as a market substitute for Plaintiff's licensing program.
@@ -577,9 +640,9 @@
           Argent Microsystems, Inc. v. Vellum Semiconductor, Inc. &nbsp;|&nbsp; S.D. Cal. &nbsp;|&nbsp; September 8, 2022 &nbsp;|&nbsp; 3:21-cv-01829-GPC-DEB
         </div>
         <div class="argument-categories">
-          <a class="category-tag" href="#">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
+          <a class="category-tag" href="#" data-path="Civil Procedure / Substantive Law / Intellectual Property">Intellectual Property<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
           <span class="cat-sep">|</span>
-          <a class="category-tag" href="#">Patent Damages<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
+          <a class="category-tag" href="#" data-path="Patent Law / Damages / Patent Damages">Patent Damages<svg class="cat-chev" width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 4,4.5 7,1"/></svg></a>
         </div>
         <p class="argument-body">
           Plaintiff's expert applies the entire market value rule to a multi-component product without the predicate showing that the patented feature drives consumer demand. The Federal Circuit has rejected exactly this approach in <a class="text-link" href="#">LaserDynamics v. Quanta Computer</a>, and the opinion should be excluded in its entirety.
@@ -795,6 +858,42 @@
         .join('\n          ');
     });
   })();
+
+  // Area-of-law dropdowns (per Figma node 3617:23275). Each .category-tag
+  // declares its breadcrumb path as `data-path="a / b / c"`. Wrap each
+  // tag in a .cat-dropdown container with a .cat-dropdown-panel below
+  // showing the breadcrumb (parents are links; the final item is bold).
+  document.querySelectorAll('.category-tag[data-path]').forEach(tag => {
+    const wrap = document.createElement('span');
+    wrap.className = 'cat-dropdown';
+    tag.parentNode.insertBefore(wrap, tag);
+    wrap.appendChild(tag);
+
+    const panel = document.createElement('div');
+    panel.className = 'cat-dropdown-panel';
+    const segs = tag.dataset.path.split(' / ');
+    segs.forEach((seg, i) => {
+      if (i > 0) {
+        const sep = document.createElement('span');
+        sep.className = 'cat-crumb-sep';
+        sep.textContent = '›';
+        panel.appendChild(sep);
+      }
+      if (i === segs.length - 1) {
+        const cur = document.createElement('strong');
+        cur.className = 'cat-crumb-current';
+        cur.textContent = seg;
+        panel.appendChild(cur);
+      } else {
+        const link = document.createElement('a');
+        link.className = 'cat-crumb-link';
+        link.href = '#';
+        link.textContent = seg;
+        panel.appendChild(link);
+      }
+    });
+    wrap.appendChild(panel);
+  });
 
   // Sidebar filter +/- toggles. Each .filter-toggle controls the
   // immediately-following .filter-children block. .is-expanded means
