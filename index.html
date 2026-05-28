@@ -363,37 +363,37 @@
           <div class="filter-item">
             <input type="checkbox">
             <span class="filter-item-label">Civil Rights</span>
-            <span class="filter-item-count">0</span>
+            <span class="filter-item-count">8</span>
           </div>
           <div class="filter-item">
             <input type="checkbox">
             <span class="filter-item-label">Commercial Litigation</span>
-            <span class="filter-item-count">0</span>
+            <span class="filter-item-count">16</span>
           </div>
           <div class="filter-item">
             <input type="checkbox">
             <span class="filter-item-label">Contract Disputes</span>
-            <span class="filter-item-count">0</span>
+            <span class="filter-item-count">5</span>
           </div>
           <div class="filter-item">
             <input type="checkbox">
             <span class="filter-item-label">Employment Law</span>
-            <span class="filter-item-count">0</span>
+            <span class="filter-item-count">24</span>
           </div>
           <div class="filter-item">
             <input type="checkbox">
             <span class="filter-item-label">ERISA</span>
-            <span class="filter-item-count">0</span>
+            <span class="filter-item-count">2</span>
           </div>
           <div class="filter-item">
             <input type="checkbox" checked>
             <span class="filter-item-label">Intellectual Property</span>
-            <span class="filter-item-count">6</span>
+            <span class="filter-item-count">34</span>
           </div>
           <div class="filter-item">
             <input type="checkbox">
             <span class="filter-item-label">Labor &amp; Employment</span>
-            <span class="filter-item-count">0</span>
+            <span class="filter-item-count">4</span>
           </div>
         </div>
       </div>
@@ -416,7 +416,6 @@
 
       <!-- Active filter pills (PRD § 3 — appear after IP and S.D. Cal. are applied) -->
       <div class="active-filters" id="active-filters">
-        <span class="active-filters-label">Filtered by:</span>
         <span class="active-filter-pill" data-filter="practice-area" data-label="Intellectual Property">
           Intellectual Property
           <button type="button" class="active-filter-x" aria-label="Remove Intellectual Property filter">
@@ -438,7 +437,7 @@
       </div>
 
       <!-- Card 1: TidalWave Networks v. Vellum Semiconductor (the demo clicks this) -->
-      <div class="argument-card">
+      <div class="argument-card" data-doctype="motion">
         <div class="argument-tags">
           <span class="tag-pill selected">Motion</span>
         </div>
@@ -457,7 +456,7 @@
       </div>
 
       <!-- Card 2: Helix Diagnostics v. Vellum Semiconductor -->
-      <div class="argument-card">
+      <div class="argument-card" data-doctype="motion">
         <div class="argument-tags">
           <span class="tag-pill">Motion</span>
         </div>
@@ -476,7 +475,7 @@
       </div>
 
       <!-- Card 3: Marin Apparel v. Crestline Outfitters -->
-      <div class="argument-card">
+      <div class="argument-card" data-doctype="motion">
         <div class="argument-tags">
           <span class="tag-pill">Motion</span>
         </div>
@@ -495,7 +494,7 @@
       </div>
 
       <!-- Card 4: Sierra BioCore v. Vellum Semiconductor -->
-      <div class="argument-card">
+      <div class="argument-card" data-doctype="opposition">
         <div class="argument-tags">
           <span class="tag-pill">Opposition</span>
         </div>
@@ -514,7 +513,7 @@
       </div>
 
       <!-- Card 5: Lattice Audio v. Northbeam Studios -->
-      <div class="argument-card">
+      <div class="argument-card" data-doctype="motion">
         <div class="argument-tags">
           <span class="tag-pill">Motion</span>
         </div>
@@ -533,7 +532,7 @@
       </div>
 
       <!-- Card 6: Argent Microsystems v. Vellum Semiconductor -->
-      <div class="argument-card">
+      <div class="argument-card" data-doctype="motion">
         <div class="argument-tags">
           <span class="tag-pill">Motion</span>
         </div>
@@ -690,6 +689,38 @@
     });
 
     render();
+  })();
+
+  // Randomize each argument card's pill set on load. Each card declares
+  // a `data-doctype` (motion | opposition | response | order) — the pill
+  // matching that doctype is always present and rendered in the .selected
+  // state. The card then picks 0–3 additional pills from the others, and
+  // all pills render in the canonical order: motion, opposition,
+  // response, order.
+  (() => {
+    const ORDER = [
+      { key: 'motion',     label: 'Motion' },
+      { key: 'opposition', label: 'Opposition' },
+      { key: 'response',   label: 'Response' },
+      { key: 'order',      label: 'Order' },
+    ];
+    document.querySelectorAll('.argument-card[data-doctype]').forEach(card => {
+      const docType = card.dataset.doctype;
+      const tagsEl  = card.querySelector('.argument-tags');
+      if (!tagsEl) return;
+      const others = ORDER.map(p => p.key).filter(k => k !== docType);
+      // Fisher–Yates shuffle
+      for (let i = others.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [others[i], others[j]] = [others[j], others[i]];
+      }
+      const extraCount = Math.floor(Math.random() * 4); // 0–3 extras
+      const present = new Set([docType, ...others.slice(0, extraCount)]);
+      tagsEl.innerHTML = ORDER
+        .filter(p => present.has(p.key))
+        .map(p => `<span class="tag-pill${p.key === docType ? ' selected' : ''}">${p.label}</span>`)
+        .join('\n          ');
+    });
   })();
 
   // Active filter pills: × removes the pill from the row and unchecks the
