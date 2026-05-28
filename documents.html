@@ -97,6 +97,11 @@
       text-decoration: none;
     }
     .doc-list-title:hover { text-decoration: underline; }
+    .doc-list-item.selected .doc-list-title {
+      color: var(--c-text-body);
+      cursor: default;
+    }
+    .doc-list-item.selected .doc-list-title:hover { text-decoration: none; }
 
     .doc-list-meta {
       font-size: 12px;
@@ -346,7 +351,7 @@
       <!-- 1. Motion to Dismiss (currently open) -->
       <div class="doc-list-item selected">
         <div class="doc-list-tags">
-          <span class="tag-pill">Motion to Dismiss</span>
+          <span class="tag-pill selected">Motion to Dismiss</span>
         </div>
         <a href="#" class="doc-list-title">Defendant's Motion to Dismiss for Failure to State a Claim Under 35 U.S.C. § 101</a>
         <div class="doc-list-meta">
