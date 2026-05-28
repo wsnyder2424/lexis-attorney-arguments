@@ -18,6 +18,8 @@
 
   --c-blue-selected: #eef2fa;
   --c-blue-hover: #f7f9fc;
+
+  --c-highlight: #F7F6F9;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
