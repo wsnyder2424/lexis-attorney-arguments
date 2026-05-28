@@ -388,7 +388,7 @@ svg { display: inline-block; vertical-align: middle; }
 .tag-pill:hover { background: var(--c-blue-selected); }
 .tag-pill.selected {
   background: var(--c-blue-selected);
-  border-color: rgba(18, 72, 160, 0.7);
+  border-color: transparent;
   color: var(--c-primary);
 }
 
