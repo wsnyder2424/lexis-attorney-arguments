@@ -231,12 +231,15 @@ svg { display: inline-block; vertical-align: middle; }
   font-weight: 700;
 }
 .tab:hover:not(.active) { color: var(--c-text-body); }
-/* Floats just below the tab-bar's gray divider without taking flow space. */
+/* Floats just below the tab-bar's gray divider without taking flow space.
+   Hidden for now — the utility icons (folder/print/email/download) don't
+   have wired behavior in the prototype and the top-right feels cleaner
+   without them. Restore by removing `display: none`. */
 .tab-bar-right {
   position: absolute;
   top: 100%;
   right: 0;
-  display: flex;
+  display: none;
   align-items: center;
   gap: 14px;
   padding: 10px 20px;
